@@ -1,0 +1,55 @@
+.main-nav-bar{
+    li{
+        display: flex;
+        position: relative;
+        a{
+            margin:0 rem(8px);
+            padding: rem(7px) rem(4px) rem(7px) rem(12px);
+            display:flex;
+            align-items: center;
+            svg{
+                @include iconMd;
+                margin-inline-end:1rem;
+                path{
+                    fill:#5c5f62;
+                } 
+            }
+            font-size: rem(14px);
+            font-weight: 400;
+            line-height: rem(20px);
+            flex-grow: 1;
+            letter-spacing: rem(1px);
+            font-family: 'SF Pro';
+            &:hover{
+                text-decoration: none;
+                background-color: rgba(241, 242, 243, 1);
+            }
+            &.active{
+                background-color: rgba(237, 238, 239, 1);
+                color: $clr5;
+               &::before{
+                   content: '';
+                   height: 100%;
+                   width:3px;
+                   background-color: $clr5;
+                   border-top-right-radius:3px ;
+                   border-bottom-right-radius: 3px;
+                   position: absolute;
+                   left: 0;
+               }
+                svg{
+                    path{
+                        fill:$clr5
+                    }
+                }
+            }
+        }
+    }
+    @include for-normal-layout{
+        padding-top: rem(12px);
+        width: $sideBarWidth;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        border-inline-end: 1px solid $brd1;
+    }
+}

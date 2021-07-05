@@ -1,0 +1,44 @@
+.main-container {
+    display: grid;
+    grid-template-columns:
+        minmax(2rem, 1fr)
+        minmax(auto, $normal-breakpoint)
+        minmax(2rem, 1fr);
+
+    > * {
+        grid-column: 2;
+
+        &.full {
+            grid-column: 1 / -1;
+        }
+    }
+
+    @include for-narrow-layout {
+        grid-template-columns:
+            minmax(2rem, 1fr)
+            minmax(auto, $mobile-breakpoint)
+            minmax(2rem, 1fr);
+    }
+    @include for-normal-layout {
+        grid-template-columns:
+            minmax(2rem, 1fr)
+            minmax(auto, $narrow-breakpoint)
+            minmax(2rem, 1fr);
+    }
+    @include for-wide-layout {
+        grid-template-columns:
+            minmax(2rem, 1fr)
+            minmax(auto, $wide-breakpoint)
+            minmax(2rem, 1fr);
+    }
+}
+.main-app-wrapper{
+    display:flex;
+ flex-grow: 1;
+   
+}
+
+
+
+
+

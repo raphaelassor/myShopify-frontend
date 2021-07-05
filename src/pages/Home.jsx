@@ -1,17 +1,33 @@
-import { Link } from 'react-router-dom'
-import logo from '../logo.svg'
-import { ReactComponent as LogoSvg } from '../logo.svg'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
-export function Home() {
-  // const logoUrl = 'logo.svg'
-  return (
-    <div>
-      <h1>Home!</h1>
-      {/* <img src={require('../' + logo).default} alt="" /> */}
-      <img src={logo} alt="" />
-      <LogoSvg />
+class _Home extends Component {
+  state = {
+    reviewToEdit: {
+      txt: '',
+      aboutUserId: ''
+    }
+  }
+ 
 
-      <Link to='/cars'>Cars</Link>
-    </div>
-  )
+ 
+
+  render() {
+    return (
+      <div className="home">
+   
+      </div>
+    )
+  }
 }
+
+const mapStateToProps = state => {
+  return {
+    
+  }
+}
+const mapDispatchToProps = {
+  
+}
+
+export const Home = connect(mapStateToProps, mapDispatchToProps)(_Home)

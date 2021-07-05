@@ -1,0 +1,76 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    line-height: 1.15;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background-color: $clr1;
+    color: $clr3;
+    font-family:sans-serif;
+}
+
+section,
+header,
+main,
+footer {
+    display: block;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+    line-height: 1;
+}
+
+
+
+button,
+input,
+optgroup,
+select,
+textarea {
+    font-family: inherit; 
+    font-size: 100%; 
+    line-height: 1.15; 
+    margin: 0; 
+}
+button{
+        outline: none;
+        border: none;
+        cursor: pointer;
+}
+textarea{
+    overflow: auto;
+    resize: none;
+}
+
+img {
+    max-width: 100%;
+    border-style:none;
+}
+progress {
+    vertical-align: baseline;
+}
+
+p {
+    margin: 0 0 1em;
+    max-width: 40ch;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;// here you can put the link color 
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
