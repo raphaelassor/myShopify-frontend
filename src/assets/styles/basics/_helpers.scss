@@ -10,6 +10,7 @@
 }
 .fs20 {
     font-size: rem(20px);
+    font-weight: 500;
 }
 .fs24 {
     font-size: rem(24px);
@@ -112,10 +113,17 @@
         object-position: center;
     }
 }
-
-.primary {
+h1,h2,h3,h4{
+    &.md{
+        font-size: rem(20px);
+    }
 }
-.secondary {
+.page-surface{
+    background-color: $clr2;
+    font-size: 14px;
+    border-radius: rem(8px);
+    box-shadow: $boxShad1;
 }
-.danger {
+.page-header{
+    margin-bottom: rem(16px);
 }

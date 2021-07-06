@@ -1,15 +1,32 @@
-.primary-btn {
-   
+
+.btn-primary{
+    background-color:$clr5;
+    color: white;
+    &:hover{
+        background-color:#005e46;
+    }
+}
+.btn-danger{
+    background-color: transparent;
+    color: $clr6;
+    border:1px solid $clr6;
+
+}
+.btn-neutral{
+    background-color: white;
+    border:1px solid #babfc3;
+    border-radius: $brdRad1;
 }
 
-.secondary-btn {
-   
-}
-.danger-btn{
-    
+.btn-md{
+    padding:rem(7px) rem(16px) ;
+    border-radius: 4px;
+    min-height: rem(36px);
+    font-size: rem(14px);
+    @include centerAllInside;
 }
 
-.wide-btn{
+.btn-lg{
     padding-left: rem(24px);
     padding-right: rem(24px);
 }

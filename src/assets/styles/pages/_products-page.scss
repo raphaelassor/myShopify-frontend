@@ -1,0 +1,39 @@
+.products-page{
+    overflow: auto;
+    ul{
+        padding:10px 8px;
+        li{
+            margin-inline-end: 10px;
+        }
+        border-bottom: 1px solid $brd1;
+        margin-bottom: 1rem;
+    }
+    .filter{
+        padding:10px 8px;
+        input{
+            padding:8px 12px;
+        }
+    }
+    .table-container{
+        overflow-x: scroll;
+        width: 100%;
+        table{
+            text-align: start;
+            width:100%;
+            border-collapse: collapse;
+            th{
+                text-align: start;
+                padding:rem(16px) rem(16px)
+            }
+            td{
+                padding:rem(8px) rem(16px)
+            }
+            th,td{
+                border-bottom: 1px solid $brd1;
+                border-collapse: collapse;
+            }
+            
+          
+        }
+    }
+}

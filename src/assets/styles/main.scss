@@ -12,8 +12,13 @@
 
 @import "./app";
 
+//PAGES
+@import "./pages/products-page";
 // CMPS
 @import "cmps/Header";
-@import "cmps/main-nav-bar"
+@import "cmps/main-nav-bar";
+@import "cmps/avatar";
+@import "cmps/status-widget";
+@import "cmps/product-preview";
 
 

@@ -6,7 +6,7 @@ import {ReactComponent as OrderIcon } from '../assets/img/icons/orders.svg'
 import {ReactComponent as CustomerIcon } from '../assets/img/icons/customers.svg'
 import {ReactComponent as CollectionIcon } from '../assets/img/icons/collections.svg'
 
-export function MainNavBar(){
+export const MainNavBar=()=>{
 
     return (
     <nav className="main-nav-bar">

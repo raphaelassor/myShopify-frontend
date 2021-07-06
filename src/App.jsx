@@ -13,9 +13,11 @@ export function App() {
         <Header></Header>
         <main className="main-app-wrapper">
         <MainNavBar/>
+        <section className="main-container">
           <Switch>
-            {routes.map(route => <Route key={route.path} component={route.component} path={route.path} />)}
+            {routes.map(route => <Route key={route.path} exact component={route.component} path={route.path} />)}
           </Switch>
+        </section>
         </main>
         <footer>
           Starter

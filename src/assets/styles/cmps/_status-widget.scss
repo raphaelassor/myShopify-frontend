@@ -1,0 +1,16 @@
+.status-widget{
+    border-radius: 2rem;
+    font-size: rem(13px);
+    padding: rem(4px) rem(8px);
+    width: min-content;
+    @include centerAllInside;
+    &.active{
+        background-color: $stSuccess;
+    }
+    &.archive{
+        background-color: $stMuted;
+    }
+    &.draft{
+        background-color: $stDraft;
+    }
+}

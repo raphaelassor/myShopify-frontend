@@ -4,13 +4,16 @@ $clr2:#FFFFFF ;
 $clr3:rgb(32, 34, 35) ;	
 $clr4:#6D7175 ;	
 $clr5:#008060 ;		
-$clr6:#D82C0D;		
+$clr6:#D82C0D;
+$clrIcon:#5c5f62;		
 
 // BORDER STYLE 
 $brd1:#E1E3E5;
 $brd2:#BABFBB;
 
-$brdRad1:0.4rem;
+
+$brdRad1:rem(4px);
+
 $brdRad2:2rem;
 
 $boxShad1:0 0 0 1px rgba(63,63,68,.05),0 1px 3px 0 rgba(63,63,68,.15);
@@ -20,6 +23,7 @@ $boxShad2:0 2px 2px -1px #00000026;
 $stSuccess:#AEE9D1;
 $stWarning:#FFEA8A;
 $stMuted:#E4E5E7;
+$stDraft:#a4e8f2;
 
 //ICONS 
 $iconReg:#5C5F62;
@@ -30,7 +34,7 @@ $iconActive:$clr4 ;
 $mobile-breakpoint: 550px;
 $narrow-breakpoint: 768px;
 $normal-breakpoint: 1040px;
-$wide-breakpoint:1440px;
+$wide-breakpoint:1350px;
 
 //SIZES 
 $sideBarWidth:rem(240px);

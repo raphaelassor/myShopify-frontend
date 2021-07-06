@@ -11,7 +11,7 @@
                 @include iconMd;
                 margin-inline-end:1rem;
                 path{
-                    fill:#5c5f62;
+                    fill:$clrIcon;
                 } 
             }
             font-size: rem(14px);
@@ -47,7 +47,8 @@
     }
     @include for-normal-layout{
         padding-top: rem(12px);
-        width: $sideBarWidth;
+        min-width: $sideBarWidth;
+        max-width: $sideBarWidth;
         overflow: hidden;
         text-overflow: ellipsis;
         border-inline-end: 1px solid $brd1;

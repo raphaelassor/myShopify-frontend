@@ -1,7 +1,5 @@
 header {
    height: rem(56px);
-   overflow: hidden;
-   text-overflow: ellipsis;
    background-color: $clr2;
    box-shadow: $boxShad1;
    nav {
@@ -16,15 +14,39 @@ header {
       grid-template-columns: $sideBarWidth 1fr;
       flex-grow: 1;
       height: 100%;
-      input{
-         background-color: $clr1;
-         border-radius: 3px;
-         height: rem(36px);
-         line-height: rem(24px);
-         border: none;
-         outline: none;
-         flex-grow: 1;
-         margin-inline-start: rem(36px);
+      .input-container{
+         max-width: rem(580px);
+         position: relative;
+         input{
+            width: 100%;
+            background-color: $clr1;
+            border-radius: 3px;
+            height: rem(36px);
+            line-height: rem(24px);
+            border: none;
+            outline: none;
+            flex-grow: 1;
+            font-size:14px;
+            padding-inline-start: rem(36px);
+         }
+         svg{
+            position: absolute;
+            left: rem(8px);
+            top: 50%;
+            transform:translateY(-50%);
+            @include iconMd;
+            path{
+               fill:$clrIcon;
+            } 
+         }
+      }
+      .user-nav{
+         padding:rem(6px) rem(8px);
+         .avatar{
+            margin-inline-end: rem(8px);
+         }
+         font-size: 13px;
+         letter-spacing: 00.7px;
       }
       .store-select {
          visibility: hidden;

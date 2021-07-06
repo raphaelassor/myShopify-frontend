@@ -15,7 +15,7 @@ class _Home extends Component {
   render() {
     return (
       <div className="home">
-   
+        HONE!
       </div>
     )
   }

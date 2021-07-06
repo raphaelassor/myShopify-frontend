@@ -1,0 +1,11 @@
+.avatar{
+    border-radius: 50%;
+    width:rem(32px);
+    height:rem(32px); 
+    background-color: #fdc9d0;
+    font-weight: 600;
+    color: #4f0e1f;
+    @include centerAllInside;
+    font-size: rem(14px);
+
+}
