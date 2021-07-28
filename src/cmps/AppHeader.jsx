@@ -5,9 +5,9 @@ import {ReactComponent as DropdownIcon} from '../assets/img/icons/dropdown.svg'
 import {ReactComponent as SearchIcon} from '../assets/img/icons/search.svg'
 import { Avatar } from './Avatar'
 
-export const Header = ()=>{
+export const AppHeader = ()=>{
     return (
-        <header className="main-header">
+        <header className="app-header">
             <nav>
             <div className="store-select flex align-center">
                 <img  className="logo" src="https://cdn.shopify.com/shopifycloud/web/assets/v1/2217fb04df073033ccce8d125b0ea020.svg" />

@@ -15,12 +15,14 @@
 .btn-neutral{
     background-color: white;
     border:1px solid #babfc3;
-    border-radius: $brdRad1;
+    &:hover{
+        background-color:#f6f6f7
+    }
 }
 
 .btn-md{
     padding:rem(7px) rem(16px) ;
-    border-radius: 4px;
+    border-radius: $brdRad1;
     min-height: rem(36px);
     font-size: rem(14px);
     @include centerAllInside;
@@ -29,4 +31,21 @@
 .btn-lg{
     padding-left: rem(24px);
     padding-right: rem(24px);
+}
+.btn-bar{
+    .btn-md{
+        border-radius: unset;
+        &:not(:first-child){
+            border-left: unset;
+        }
+        &:first-child{
+            border-bottom-left-radius: $brdRad1;
+            border-top-left-radius: $brdRad1;
+          
+        }
+        &:last-child{
+            border-bottom-right-radius: $brdRad1;
+            border-top-right-radius: $brdRad1;
+        }
+    }
 }

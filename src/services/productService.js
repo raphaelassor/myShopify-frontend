@@ -65,7 +65,7 @@ function getEmptyProduct() {
         description: '',
         type: '',
         vendor: '',
-        tags: [],
+        tagMap: {},
         imgUrls: [],
         price: null,
         comparePrice: null,

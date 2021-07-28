@@ -3,14 +3,15 @@ import { HashRouter as Router, Switch, Route } from 'react-router-dom'
 import {routes} from './routes.js'
 
 import {MainNavBar} from './cmps/MainNavBar'
-import { Header } from './cmps/Header'
+
+import { AppHeader } from './cmps/AppHeader.jsx'
 
 
 export function App() {
   return (
     <div className="app">
       <Router>
-        <Header></Header>
+        <AppHeader/>
         <main className="main-app-wrapper">
         <MainNavBar/>
         <section className="main-container">

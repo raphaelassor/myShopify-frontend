@@ -2,6 +2,8 @@
     padding-top: rem(16px);
     flex-grow: 1;
     display: grid;
+    height: calc(100vh - 56px);
+    overflow-y: auto;
     grid-template-columns:1fr;
     > * {
         grid-column: 2;

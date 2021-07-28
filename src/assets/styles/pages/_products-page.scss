@@ -1,39 +1,73 @@
-.products-page{
-    overflow: auto;
-    ul{
-        padding:10px 8px;
-        li{
+.products-page {
+    ul {
+        padding: 10px 8px;
+        li {
             margin-inline-end: 10px;
         }
         border-bottom: 1px solid $brd1;
         margin-bottom: 1rem;
     }
-    .filter{
-        padding:10px 8px;
-        input{
-            padding:8px 12px;
+    .filter {
+        padding: 10px 8px;
+        input {
+            padding: 8px 12px;
         }
     }
-    .table-container{
+    .data-actions-wrapper{
+        display: none;
+        z-index: 10;
+        padding:rem(8px) ;
+        &.selected-mode{
+            display: block;
+        }
+    }
+    .table-container {
         overflow-x: scroll;
         width: 100%;
-        table{
+        table {
             text-align: start;
-            width:100%;
+            width: 100%;
+            min-width: 100%;
             border-collapse: collapse;
-            th{
-                text-align: start;
-                padding:rem(16px) rem(16px)
+            white-space: nowrap;
+            tr {
+                cursor: pointer;
+                &:hover {
+                    background-color: #f9fafb;
+                    transition: 0.25s;
+                }
+                th {
+                    line-height: rem(20px);
+                    font-weight: 500;
+                    &:not(:first-of-type){
+                        padding: rem(16px);
+                    }
+                    
+                }
+                th,
+                td {
+                    border-bottom: 1px solid $brd1;
+                    border-collapse: collapse;
+                    text-align: start;
+                    &:first-child{
+                        padding-left:rem(10px);
+                    }
+                }
+                td{
+                    &:not(:first-child) {
+                        padding: rem(8px) rem(16px);
+                    }
+                }
             }
-            td{
-                padding:rem(8px) rem(16px)
+            &.selected-mode{
+                transform: translateY(-52px);
             }
-            th,td{
-                border-bottom: 1px solid $brd1;
-                border-collapse: collapse;
-            }
-            
-          
         }
+    }
+    .MuiIconButton-root {
+        padding:0;
+    }
+    .PrivateSwitchBase-root-1{
+        padding:0;
     }
 }

@@ -1,5 +1,8 @@
-header {
-   height: rem(56px);
+.app-header {
+   min-height: rem(56px);
+   max-height: rem(56px);
+   display: flex;
+   align-items: center;
    background-color: $clr2;
    box-shadow: $boxShad1;
    nav {
