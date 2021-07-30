@@ -1,10 +1,9 @@
 import React from 'react'
 import { HashRouter as Router, Switch, Route } from 'react-router-dom'
 import {routes} from './routes.js'
-
 import {MainNavBar} from './cmps/MainNavBar'
-
 import { AppHeader } from './cmps/AppHeader.jsx'
+import { DynamicModal } from './cmps/DynamicModal.jsx'
 
 
 export function App() {
@@ -19,10 +18,8 @@ export function App() {
             {routes.map(route => <Route key={route.path} exact component={route.component} path={route.path} />)}
           </Switch>
         </section>
+        <DynamicModal/>
         </main>
-        <footer>
-          Starter
-        </footer>
       </Router>
     </div>
   )

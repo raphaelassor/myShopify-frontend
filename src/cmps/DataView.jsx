@@ -4,21 +4,42 @@ import { DataActions } from "../cmps/DataActions";
 import { useState } from "react";
 import { utilService } from "../services/utilService";
 import { useSelection } from "../hooks/useSelection";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setGlobalSelected } from "../store/actions/systemActions";
+import { useRef } from "react";
 export const DataView = ({ data, type, viewLayout }) => {
+    const dispatch=useDispatch()
+    const {systemSelectedData}=useSelector(state=>state.systemModule)
+    const [selectedData, handleSelection, toggleSelection] = useSelection({...systemSelectedData})
+    const selectedCount = useRef(null)
 
-    const [selectedDataMap, handleSelection, toggleSelection] = useSelection({})
-    const selectedCount = Object.keys(selectedDataMap).length
+    useEffect(()=>{
+        dispatch(setGlobalSelected(selectedData))
+        selectedCount.current = getMapItemCount(selectedData)
+    },[selectedData])
+
+    useEffect(()=>{
+        if(selectedCount.current!==getMapItemCount(systemSelectedData)){
+            toggleSelection([])
+        }
+    },[systemSelectedData])
+
+    const getMapItemCount=(map)=>{
+        return Object.keys(map).length
+    }
 
     const checkIsSelected = (entity) => {
-        return !!selectedDataMap[entity._id]
+        return !!selectedData[entity._id]
     }
     const toggleSelectAll = () => {
         toggleSelection(data)
     }
-    const selectedModeClass = selectedCount ? 'selected-mode' : ''
+   
+    const selectedModeClass = selectedCount.current ? 'selected-mode' : ''
     
     const Selector = () => {
-        return <Checkbox className="select" checked={!!selectedCount}
+        return <Checkbox className="select" checked={!!selectedCount.current}
          onChange={toggleSelectAll} inputProps={{ 'aria-label': 'secondary checkbox' }} />
     }
     return (<>
@@ -27,9 +48,9 @@ export const DataView = ({ data, type, viewLayout }) => {
             <div className="flex btn-bar">
             <button className=" btn-md btn-neutral relative">
                 <Selector/>
-                <span> <span className="count">{selectedCount}</span> selected</span>
+                <span> <span className="count">{selectedCount.current}</span> selected</span>
             </button>
-            <DataActions type={type} selectedData={selectedDataMap} />
+            <DataActions type={type} data={systemSelectedData} />
             </div>
         </div>
 

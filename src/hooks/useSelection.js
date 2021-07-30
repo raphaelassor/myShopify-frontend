@@ -8,7 +8,7 @@ export const useSelection = (initialState = {}) => {
     }
     const toggleSelectAll = (data) => {
         const selectedCount = Object.keys(selectedData).length
-        if (selectedCount === data.length) setSelected({})
+        if (selectedCount >= data.length) setSelected({})
         else {
             data.forEach(entity => {
                 if (!selectedData[entity._id]) selectedData[entity._id] = entity
@@ -16,6 +16,7 @@ export const useSelection = (initialState = {}) => {
             setSelected({ ...selectedData })
         }
     }
+
     return [
         selectedData,
         handleSelection,

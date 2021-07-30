@@ -1,6 +1,6 @@
 const initialState = {
   isLoading: false,
-  selectedData: {}
+  systemSelectedData: {}
 };
 
 export function systemReducer(state = initialState, action = {}) {
@@ -9,10 +9,10 @@ export function systemReducer(state = initialState, action = {}) {
       return { ...state, isLoading: true }
     case 'LOADING_DONE':
       return { ...state, isLoading: false }
-    default: return state
     case 'SET_MODAL':
-      return {
-        ...state, modal: { isActive: true, msg: action.msg }
-      }
+      return { ...state, modal: { isActive: true, msg: action.msg } }
+    case 'SET_SELECTED':
+      return { ...state, systemSelectedData: action.selectedData }
+    default: return state
   }
 }

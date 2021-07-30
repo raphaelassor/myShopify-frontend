@@ -31,7 +31,7 @@ export function ProductsPage() {
                 <li>Draft</li>
             </ul>
             <DataFilter filter={filterBy}/>
-            <DataView data={products} type={'PRODUCT'} viewLayout={productViewLayout}/>
+            <DataView data={products} type={'PRODUCT'} viewLayout={productViewLayout} />
         </div>
     </div>
 }

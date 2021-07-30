@@ -14,8 +14,14 @@ export function endLoading() {
 }
 
 export function setError(e) {
-
     return dispatch => {
         dispatch({ type: 'SET_MODAL', msg: e })
     }
 }
+
+export function setGlobalSelected(selectedData){
+    return dispatch=>{
+        dispatch({type:'SET_SELECTED',selectedData})
+    }
+}
+

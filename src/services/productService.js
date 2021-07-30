@@ -4,14 +4,16 @@ import { httpService } from './httpService'
 import { storageService } from './asyncStorageService'
 
 export const productService = {
-    query,
-    remove,
-    getById,
-    save,
+    queryProducts,
+    removeProductById,
+    removeManyProductsById,
+    getProductById,
+    saveProduct,
+    updateManyProducts,
     getEmptyProduct,
 }
 
-async function query(filterBy = { ctg: '' }) {
+async function queryProducts(filterBy = { ctg: '' }) {
     try {
         // return await httpService.get('product', filterBy)
         return await storageService.query('product')
@@ -20,16 +22,25 @@ async function query(filterBy = { ctg: '' }) {
     }
 }
 
-async function remove(productId) {
+async function removeProductById(productId) {
     try {
         // await httpService.delete(`product/${productId}`)
-        await storageService.delete('product',productId)
+        await storageService.remove('product',productId)
     } catch (err) {
         throw err
     }
 }
 
-async function getById(productId) {
+async function removeManyProductsById(productIds){
+    try{
+        // await httpService.delete(`product`,productIds)
+        await storageService.removeMany(`product`,productIds)
+    } catch (err){
+        throw err
+    }
+}
+
+async function getProductById(productId) {
     try {
         // return await httpService.get(`product/${productId}`)
         return await storageService.get('product',productId)
@@ -38,7 +49,7 @@ async function getById(productId) {
     }
 }
 
-async function save(product) {
+async function saveProduct(product) {
     if (product._id) {
         try {
             // return await httpService.put(`product/${product._id}`, product)
@@ -53,6 +64,14 @@ async function save(product) {
         } catch (err) {
             throw err
         }
+    }
+}
+async function updateManyProducts(products){
+    try {
+        // return await httpService.put(`product/`, products)
+        return await storageService.putMany('product',products)
+    } catch (err) {
+        throw err
     }
 }
 

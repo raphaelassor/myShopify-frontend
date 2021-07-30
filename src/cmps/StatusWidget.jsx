@@ -1,15 +1,21 @@
 import { useMemo } from "react"
+import { statusNames } from '../services/settings'
+export const StatusWidget = ({ product }) => {
 
-export const StatusWidget=({product})=>{
-    const status=useMemo(()=>{
-        if(product.isArchived) return {class:'archive',txt:'Archived'}
-        else if(product.isActive) return {class:'active',txt:'Active'}
-        return {class:'draft',txt:'Draft'}
-    })
-    return(
+    const status = useMemo(() => {
+        switch (product.status) {
+            case statusNames.active:
+                return { txt: 'Active', class: 'active' }
+            case statusNames.archive:
+                return { txt: 'Archived', class: 'archive' }
+            case statusNames.draft:
+                return { txt: 'Draft', class: 'draft' }
+        }
+    }, [product])
+    return (
         <div className={`status-widget ${status.class}`}>
             <span>
-            {status.txt}
+                {status.txt}
             </span>
         </div>
     )
