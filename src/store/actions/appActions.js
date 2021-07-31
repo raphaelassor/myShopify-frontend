@@ -21,7 +21,22 @@ export function setError(e) {
 
 export function setGlobalSelected(selectedData){
     return dispatch=>{
-        dispatch({type:'SET_SELECTED',selectedData})
+        dispatch({type:'SET_SELECTED_DATA',selectedData})
     }
 }
-
+export function unsetGlobalSelected(){
+    return dispatch=>{
+        dispatch({type:'SET_SELECTED_DATA',selectedData:{}})
+    }
+}
+export function openModal(modalName,props){
+    return dispatch =>{
+        dispatch({
+            type:'SET_MODAL',
+            modal:{
+                name:modalName,
+                props
+            }
+        })
+    }
+}

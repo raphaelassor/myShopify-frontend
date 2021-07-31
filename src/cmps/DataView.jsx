@@ -6,11 +6,11 @@ import { utilService } from "../services/utilService";
 import { useSelection } from "../hooks/useSelection";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setGlobalSelected } from "../store/actions/systemActions";
+import { setGlobalSelected } from "../store/actions/appActions";
 import { useRef } from "react";
 export const DataView = ({ data, type, viewLayout }) => {
     const dispatch=useDispatch()
-    const {systemSelectedData}=useSelector(state=>state.systemModule)
+    const {systemSelectedData}=useSelector(state=>state.appModule)
     const [selectedData, handleSelection, toggleSelection] = useSelection({...systemSelectedData})
     const selectedCount = useRef(null)
 
@@ -18,9 +18,10 @@ export const DataView = ({ data, type, viewLayout }) => {
         dispatch(setGlobalSelected(selectedData))
         selectedCount.current = getMapItemCount(selectedData)
     },[selectedData])
-
+    
     useEffect(()=>{
-        if(selectedCount.current!==getMapItemCount(systemSelectedData)){
+        if(getMapItemCount(systemSelectedData)!==selectedCount.current){
+            selectedCount.current=0
             toggleSelection([])
         }
     },[systemSelectedData])
@@ -35,6 +36,7 @@ export const DataView = ({ data, type, viewLayout }) => {
     const toggleSelectAll = () => {
         toggleSelection(data)
     }
+   
    
     const selectedModeClass = selectedCount.current ? 'selected-mode' : ''
     
