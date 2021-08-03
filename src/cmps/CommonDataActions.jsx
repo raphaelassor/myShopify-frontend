@@ -12,10 +12,10 @@ export const CommonDataActions = ({tags,remove,addTags,removeTags}) => {
             createPropsForTagsModal(removeTags, ADD_TAGS_MODE)
         dispatch(openModal(TAGS_EDIT_MODAL, props))
     }
-    const createPropsForTagsModal = (funcToCall, mode) => {
+    const createPropsForTagsModal = (cb, mode) => {
         const props = {
             updateTags(tagsToUpdate) {
-                funcToCall(tagsToUpdate)
+                cb(tagsToUpdate)
             },
             mode,
             tags
