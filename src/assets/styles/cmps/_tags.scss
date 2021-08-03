@@ -1,0 +1,50 @@
+.tag-preview {
+    background-color: $stMuted;
+    border-radius: $brdRad1;
+    padding: rem(4px) rem(6px);
+    margin-inline-end: rem(4px);
+    @include centerAllInside;
+    display: inline-flex;
+    font-size: rem(14px);
+    span{
+        &:first-child{
+            @include centerAllInside;
+            line-height: rem(20px);
+        }
+    }
+    cursor: pointer;
+    &:hover {
+        background-color: #dbdddf;
+    }
+    .close {
+        @include centerAllInside;
+        svg {
+            width: rem(20px);
+            height:rem(20px);
+            path{
+                fill: $iconReg;
+            }
+        }
+        padding-left: rem(6px) ;
+    }
+}
+.tags-edit-modal{
+    .search-container{
+        border:1px solid $stMuted;
+        border-radius: $brdRad1;
+        padding: rem(6px);
+        input{
+            border:none;
+            outline: none;
+            padding: rem(6px);
+            flex-grow: 1;
+        }
+    }
+    .tags-pool{
+        h3{
+            @include secondary-title;
+            font-size: rem(12px);
+            margin-bottom: 0.5rem;
+        }
+    }
+}

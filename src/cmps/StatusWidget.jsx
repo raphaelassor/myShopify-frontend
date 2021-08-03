@@ -10,6 +10,7 @@ export const StatusWidget = ({ product }) => {
                 return { txt: 'Archived', class: 'archive' }
             case statusNames.draft:
                 return { txt: 'Draft', class: 'draft' }
+            default:return { txt: 'Draft', class: 'draft' }
         }
     }, [product])
     return (

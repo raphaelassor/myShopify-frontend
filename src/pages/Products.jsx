@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { productService } from "../services/productService";
 import { DataFilter } from "../cmps/DataFilter";
-import { DataView } from "../cmps/DataView";
 import { useDispatch, useSelector } from "react-redux";
 import { loadProducts } from "../store/actions/productActions";
+import { PRODUCT_TYPE } from "../services/settings";
+import { DataViewAndActions } from "../cmps/DataViewAndActions";
 export function ProductsPage() {
     const dispatch=useDispatch()
     const {products,filterBy}=useSelector(state=>state.productModule)
@@ -21,7 +21,7 @@ export function ProductsPage() {
     return <div className="products-page">
         <div className="page-header flex justify-space-between align-center">
             <h1 className="fs20">Products</h1>
-            <Link className="btn-md btn-primary">Add product</Link>
+            <Link to="#" className="btn-md btn-primary">Add product</Link>
         </div>
         <div className="page-surface">
             <ul className="clean-list flex">
@@ -31,7 +31,7 @@ export function ProductsPage() {
                 <li>Draft</li>
             </ul>
             <DataFilter filter={filterBy}/>
-            <DataView data={products} type={'PRODUCT'} viewLayout={productViewLayout} />
+            <DataViewAndActions data={products} type={PRODUCT_TYPE} viewLayout={productViewLayout} />
         </div>
     </div>
 }

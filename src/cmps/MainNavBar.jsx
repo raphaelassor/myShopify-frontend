@@ -1,5 +1,5 @@
 import React from 'react' 
-import {Link, NavLink} from 'react-router-dom'
+import { NavLink} from 'react-router-dom'
 import {ReactComponent as HomeIcon } from '../assets/img/icons/home.svg'
 import {ReactComponent as ProductIcon } from '../assets/img/icons/products.svg'
 import {ReactComponent as OrderIcon } from '../assets/img/icons/orders.svg'

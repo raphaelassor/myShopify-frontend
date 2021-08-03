@@ -14,12 +14,7 @@
                     fill:$clrIcon;
                 } 
             }
-            font-size: rem(14px);
-            font-weight: 400;
-            line-height: rem(20px);
-            flex-grow: 1;
-            letter-spacing: rem(1px);
-            font-family: 'SF Pro';
+            @include secondary-title;
             &:hover{
                 text-decoration: none;
                 background-color: rgba(241, 242, 243, 1);

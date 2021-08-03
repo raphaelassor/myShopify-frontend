@@ -8,5 +8,7 @@ const shop = {
         id: String,
         name: String,
     }],
-    productTagsMap: {['tagName']:String},
+    productTags: [String],
+    orderTags:[String],
+    customerTags:[String]
 }

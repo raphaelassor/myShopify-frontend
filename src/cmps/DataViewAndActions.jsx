@@ -1,14 +1,13 @@
 import { DataPreview } from "./DataPreview"
 import Checkbox from '@material-ui/core/Checkbox';
-import { DataActions } from "../cmps/DataActions";
-import { useState } from "react";
+import { DataActions } from "./DataActions";
 import { utilService } from "../services/utilService";
-import { useSelection } from "../hooks/useSelection";
+import { useSelection } from '../services/hooks/useSelection'
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setGlobalSelected } from "../store/actions/appActions";
 import { useRef } from "react";
-export const DataView = ({ data, type, viewLayout }) => {
+export const DataViewAndActions = ({ data, type, viewLayout }) => {
     const dispatch=useDispatch()
     const {systemSelectedData}=useSelector(state=>state.appModule)
     const [selectedData, handleSelection, toggleSelection] = useSelection({...systemSelectedData})
@@ -36,20 +35,17 @@ export const DataView = ({ data, type, viewLayout }) => {
     const toggleSelectAll = () => {
         toggleSelection(data)
     }
-   
-   
     const selectedModeClass = selectedCount.current ? 'selected-mode' : ''
     
-    const Selector = () => {
+    const ViewCheckBox = () => {
         return <Checkbox className="select" checked={!!selectedCount.current}
          onChange={toggleSelectAll} inputProps={{ 'aria-label': 'secondary checkbox' }} />
     }
     return (<>
-
         <div className={`data-actions-wrapper ${selectedModeClass}`} >
             <div className="flex btn-bar">
             <button className=" btn-md btn-neutral relative">
-                <Selector/>
+                <ViewCheckBox/>
                 <span> <span className="count">{selectedCount.current}</span> selected</span>
             </button>
             <DataActions type={type} data={systemSelectedData} />
@@ -60,7 +56,7 @@ export const DataView = ({ data, type, viewLayout }) => {
             <table className={selectedModeClass}>
                 <thead >
                     <tr>
-                        <th><Selector/></th>
+                        <th><ViewCheckBox/></th>
                         {viewLayout.map(title => <th key={utilService.makeId()}>{title}</th>)}
                     </tr>
                 </thead>

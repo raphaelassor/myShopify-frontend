@@ -56,7 +56,7 @@ function put(entityType, updatedEntity) {
 function putMany(entityType, updatedEntities) {
     return query(entityType)
         .then(entities => {
-            entities=entities.map(entity=> updatedEntities[entity._id]|| entity )
+            entities = entities.map(entity => updatedEntities[entity._id] || entity)
             _save(entityType, entities)
             return entities
         })
@@ -74,8 +74,8 @@ function remove(entityType, entityId) {
 function removeMany(entityType, entityIds) {
     return query(entityType)
         .then(entities => {
-            entities=entities.filter(entity=> {
-               return ! entityIds.some(entityId=>entityId===entity._id)
+            entities = entities.filter(entity => {
+                return !entityIds.some(entityId => entityId === entity._id)
             })
             _save(entityType, entities)
         })
@@ -99,6 +99,7 @@ function _makeId(length = 5) {
 function _createEntities(entityType) {
     switch (entityType) {
         case 'product': return _createDemoProducts()
+        case 'shop': return _createDemoShop()
         // case 'order' : return _createDemoOrders()
         // case 'customer':return  _createDemoCustomers()
         default: return null
@@ -113,12 +114,30 @@ function _createDemoProducts() {
         product._id = utilService.makeId()
         product.title = 'Demo ' + utilService.getRandomInt()
         product.price = +((Math.random() * 100).toFixed(2))
-        product.status = Math.random()<0.3? statusNames.active : statusNames.active
+        product.status = Math.random() < 0.3 ? statusNames.active : statusNames.active
         product.type = 'lorem ' + utilService.getRandomInt()
         product.vendor = 'lorem ' + utilService.getRandomInt()
         product.inventory = Math.floor(Math.random() * 10000)
+        product.tags=['Luxury','to edit']
         products.push(product)
     }
     return products;
 }
 
+function _createDemoShop() {
+    return [{
+        _id:'DEMO_SHOP',
+        domains: ['fressti.com'],
+        title: 'Fressti',
+        productTypes: ['Orgainze', 'Kitchen', 'Tabletop', 'Cutlery'],
+        vendors: ['fressti.com', 'willimaseSonoma'],
+        suppliers: [
+            { id: utilService.makeId(), name: 'oberlo' },
+            { id: utilService.makeId(), name: 'cjDropshipping' },
+            { id: utilService.makeId(), name: 'aliBaba' },
+        ],
+        productTags:['on Sale', 'Luxury' , 'to edit', 'expensive', 'best Seller'],
+        orderTags: ['delayed', 'requires attention','on-time','refunded'],
+        customerTags: ['black-list','refund','reimburse','3rd complaint'],
+    }]
+}

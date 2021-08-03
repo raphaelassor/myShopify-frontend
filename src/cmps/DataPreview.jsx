@@ -1,8 +1,10 @@
+import { PRODUCT_TYPE } from "../services/settings"
 import { ProductPreview } from "./ProductPreview"
 
-export const DataPreview=(props)=>{
-const {type,entity}=props
-    switch(type){
-        case 'PRODUCT': return <ProductPreview product={entity} {...props}/>
+export const DataPreview = (props) => {
+    const { type, entity } = props
+    switch (type) {
+        case PRODUCT_TYPE: return <ProductPreview product={entity} {...props} />
+        default: return ''
     }
 }

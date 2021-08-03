@@ -1,13 +1,25 @@
 const initialState = {
-    shop: {}
+    
+        domains: [],
+        title: '',
+        productTypes: [],
+        vendors: [],
+        suppliers: [{
+            id: '',
+            name: '',
+        }],
+        productTags: [],
+        orderTags: [],
+        customerTags: []
+ 
 };
 
-export function appReducer(state = initialState, action = {}) {
+export function shopReducer(state = initialState, action = {}) {
     switch (action.type) {
         case 'SET_SHOP':
-            return { ...state, shop: action.shop }
+            return {...state,...action.shop }
         case 'UPDATE_SHOP':
-            return { ...state, shop: action.shop }
+            return { ...state, ...action.shop }
         default: return state
     }
 }

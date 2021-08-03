@@ -30,6 +30,7 @@ export function unsetGlobalSelected(){
     }
 }
 export function openModal(modalName,props){
+    
     return dispatch =>{
         dispatch({
             type:'SET_MODAL',
@@ -38,5 +39,10 @@ export function openModal(modalName,props){
                 props
             }
         })
+    }
+}
+export function closeModal(){
+    return dispatch=>{
+        dispatch({type:'UNSET_MODAL'})
     }
 }

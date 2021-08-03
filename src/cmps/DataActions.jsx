@@ -1,10 +1,12 @@
-import Checkbox from '@material-ui/core/Checkbox';
-import { ProductViewActions } from './ProductViewActions';
-export const DataActions = ({type,data}) => {
 
-        switch(type){
-            case 'PRODUCT':
-                return <ProductViewActions products={data} />
+import { PRODUCT_TYPE } from '../services/settings';
+import { ProductViewActions } from './ProductViewActions';
+export const DataActions = ({ type, data }) => {
+
+        switch (type) {
+                case PRODUCT_TYPE:
+                        return <ProductViewActions products={data} />
+                default: return ''
         }
-    
+
 }

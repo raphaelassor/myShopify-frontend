@@ -1,21 +1,52 @@
-export const shopService={
+import { storageService } from './asyncStorageService'
+import { httpService } from './httpService'
+
+export const shopService = {
     addTagsToEntities,
     removeTagsFromEntities,
+    getShopById,
+
 }
 
-function addTagsToEntities(tags,entities){
-    tags.forEach(tagName=>{
-        for (let key in entities){
-            const tagInEntity=entities[key].tags[tagName]
-            if(!tagInEntity) entities[key].tags[tagName]=tagName
+function addTagsToEntities(tagsToAdd, entities) {
+    tagsToAdd.forEach(tag => {
+        for (let id in entities) {
+            const tagsInEntity = entities[id].tags
+            if (!tagsInEntity.includes(tag)) tagsInEntity.push(tag)
         }
     })
-} 
-function removeTagsFromEntities(tags,entities){
-    tags.forEach(tagName=>{
-        for (let key in entities){
-            const tagInEntity=entities[key].tags[tagName]
-            if(tagInEntity) delete entities[key].tags[tagName]
+}
+function removeTagsFromEntities(tagsToRemove, entities) {
+    tagsToRemove.forEach(tag => {
+        for (let id in entities) {
+            const tagsInEntity = entities[id].tags
+            const idx= tagsInEntity.findIndex(tagInEntity=>tagInEntity===tag)
+            if(idx!=-1) tagsInEntity.splice(idx,1)
         }
     })
+}
+
+async function getShopById(shopId) {
+    try {
+        // return await httpService.get(`product/${productId}`)
+        return await storageService.get('shop', shopId)
+    } catch (err) {
+        throw err
+    }
+}
+
+export function getEmptyShop() {
+    return {
+        domains: [],
+        title: undefined,
+        productTypes: [],
+        vendors: [],
+        suppliers: [{
+            id: undefined,
+            name: undefined,
+        }],
+        productTags: [String],
+        orderTags:[String],
+        customerTags:[String]
+    }
 }

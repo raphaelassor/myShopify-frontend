@@ -13,6 +13,14 @@ export const productService = {
     getEmptyProduct,
 }
 
+async function saveProduct(product) {
+    try {
+        return await product._id ? _updateProduct(product) : _createProduct(product)
+    } catch (e) {
+        throw (e)
+    }
+}
+
 async function queryProducts(filterBy = { ctg: '' }) {
     try {
         // return await httpService.get('product', filterBy)
@@ -21,62 +29,56 @@ async function queryProducts(filterBy = { ctg: '' }) {
         throw err
     }
 }
-
-async function removeProductById(productId) {
-    try {
-        // await httpService.delete(`product/${productId}`)
-        await storageService.remove('product',productId)
-    } catch (err) {
-        throw err
-    }
-}
-
-async function removeManyProductsById(productIds){
-    try{
-        // await httpService.delete(`product`,productIds)
-        await storageService.removeMany(`product`,productIds)
-    } catch (err){
-        throw err
-    }
-}
-
 async function getProductById(productId) {
     try {
         // return await httpService.get(`product/${productId}`)
-        return await storageService.get('product',productId)
+        return await storageService.get('product', productId)
     } catch (err) {
         throw err
     }
 }
 
-async function saveProduct(product) {
-    if (product._id) {
-        try {
-            // return await httpService.put(`product/${product._id}`, product)
-            return await storageService.put('product',product)
-        } catch (err) {
-            throw err
-        }
-    } else {
-        try {
-            // return await httpService.post('product', product)
-            return await storageService.post('product',product)
-        } catch (err) {
-            throw err
-        }
-    }
-}
-async function updateManyProducts(products){
+async function updateManyProducts(products) {
     try {
         // return await httpService.put(`product/`, products)
-        return await storageService.putMany('product',products)
+        return await storageService.putMany('product', products)
+    } catch (err) {
+        throw err
+    }
+}
+async function removeProductById(productId) {
+    try {
+        // await httpService.delete(`product/${productId}`)
+        await storageService.remove('product', productId)
     } catch (err) {
         throw err
     }
 }
 
-function getEmptyProduct() {
+async function removeManyProductsById(productIds) {
+    try {
+        // await httpService.delete(`product`,productIds)
+        await storageService.removeMany(`product`, productIds)
+    } catch (err) {
+        throw err
+    }
+}
 
+
+
+async function _updateProduct(product) {
+    // return await httpService.put(`product/${product._id}`, product)
+    return await storageService.put('product', product)
+
+}
+async function _createProduct(product) {
+    // return await httpService.post('product', product)
+    return await storageService.post('product', product)
+}
+
+
+
+function getEmptyProduct() {
     return {
         isActive: false,
         isArchived: false,
@@ -90,7 +92,7 @@ function getEmptyProduct() {
         comparePrice: null,
         cost: null,
         sku: '',
-        inventory:null,
+        inventory: null,
         supplier: {
             name: '',
             _id: ''
@@ -101,6 +103,6 @@ function getEmptyProduct() {
         },
         origin: ''
     }
-
 }
+
 
