@@ -1,0 +1,37 @@
+.data-filter {
+    padding: 16px ;
+    &>input{ 
+        flex-grow: 1;
+        border-radius:$brdRad1;
+        padding:6px 12px 6px 0;
+        border:1px solid $brd2;
+    }
+    .filter-preview{
+        margin-inline-start: 1rem;
+        &>button{
+            margin-inline-start: 1rem;
+        }
+    }
+}
+.more-filters{
+    position: fixed;
+    height: 100vh;
+    background-color: white;
+    right:0;
+    top:0;
+    padding: 10px;
+    transform: translateX(100%);
+    width:300px;
+    transition: .3s;
+    &.expand{
+        transform: translateX(0%);
+    }
+    .options{
+        padding: 5px;
+        svg{
+            &.MuiSvgIcon-root{
+                font-size: 18px;
+            }
+        }
+    }
+}

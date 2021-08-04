@@ -1,6 +1,5 @@
 const initialState = {
   products: [],
-  filterBy: {},
 }
 
 export function productReducer(state = initialState, action = {}) {

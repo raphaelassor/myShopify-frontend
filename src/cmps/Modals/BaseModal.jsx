@@ -32,7 +32,7 @@ export const  BaseModal=({Header,Footer,children})=> {
         </Modal.Body>
         <Modal.Footer>
             <div className="flex full justify-space-between">
-          <button className="btn-md btn-neutral">Cancel</button>
+          <button onClick={onCloseModal}className="btn-md btn-neutral">Cancel</button>
           <Footer/>
             </div>
         </Modal.Footer>

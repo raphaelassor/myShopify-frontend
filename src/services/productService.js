@@ -2,6 +2,7 @@
 import { httpService } from './httpService'
 
 import { storageService } from './asyncStorageService'
+import { statusNames } from './settings'
 
 export const productService = {
     queryProducts,
@@ -11,6 +12,7 @@ export const productService = {
     saveProduct,
     updateManyProducts,
     getEmptyProduct,
+    getProductsFilter,
 }
 
 async function saveProduct(product) {
@@ -80,8 +82,7 @@ async function _createProduct(product) {
 
 function getEmptyProduct() {
     return {
-        isActive: false,
-        isArchived: false,
+        status: statusNames.active,
         title: '',
         description: '',
         type: '',
@@ -102,6 +103,16 @@ function getEmptyProduct() {
             unit: ''
         },
         origin: ''
+    }
+}
+function getProductsFilter() {
+    return {
+        vendor: '',
+        tag: '',
+        status: '',
+        type: '',
+        collection: '',
+        title:''
     }
 }
 

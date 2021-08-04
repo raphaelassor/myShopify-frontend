@@ -6,7 +6,7 @@ export const CommonDataActions = ({tags,remove,addTags,removeTags}) => {
 
     const dispatch=useDispatch()
 
-    const openEditTagsModal = (mode) => { 
+    const openTagsModal = (mode) => { 
         const props = mode === REMOVE_TAGS_MODE ?
             createPropsForTagsModal(addTags, REMOVE_TAGS_MODE) :
             createPropsForTagsModal(removeTags, ADD_TAGS_MODE)
@@ -24,8 +24,8 @@ export const CommonDataActions = ({tags,remove,addTags,removeTags}) => {
     }
 
     return <>
-        <button onClick={() => openEditTagsModal(ADD_TAGS_MODE)} className="btn-md btn-neutral">Add Tags </button>
-        <button onClick={() => openEditTagsModal(REMOVE_TAGS_MODE)} className="btn-md btn-neutral">Remove Tags </button>
+        <button onClick={() => openTagsModal(ADD_TAGS_MODE)} className="btn-md btn-neutral">Add Tags </button>
+        <button onClick={() => openTagsModal(REMOVE_TAGS_MODE)} className="btn-md btn-neutral">Remove Tags </button>
         <button onClick={remove} className="btn-md btn-neutral">Delete</button>
     </>
 }
