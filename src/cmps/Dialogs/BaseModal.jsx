@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import Modal from 'react-bootstrap/Modal'
 import { useDispatch } from "react-redux";
-import { closeModal } from "../../store/actions/appActions";
+import { closeDialog } from "../../store/actions/appActions";
 
 export const  BaseModal=({Header,Footer,children})=> {
     const [modalShow,setModalShow]=useState(false)
@@ -10,7 +10,7 @@ export const  BaseModal=({Header,Footer,children})=> {
 
     const onCloseModal=()=>{
         setModalShow(false)
-        dispatch(closeModal())
+        dispatch(closeDialog())
     }
     useEffect(()=>{
         setModalShow(true)

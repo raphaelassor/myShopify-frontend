@@ -1,0 +1,31 @@
+.snippet {
+    background-color: $stMuted;
+    border-radius: $brdRad1;
+    padding: rem(4px) rem(6px);
+    margin-inline-end: rem(4px);
+    @include centerAllInside;
+    display: inline-flex;
+    font-size: rem(14px);
+    text-transform: capitalize;
+    span{
+        &:first-child{
+            @include centerAllInside;
+            line-height: rem(20px);
+        }
+    }
+    cursor: pointer;
+    &:hover {
+        background-color: #dbdddf;
+    }
+    .close {
+        @include centerAllInside;
+        svg {
+            width: rem(20px);
+            height:rem(20px);
+            path{
+                fill: $iconReg;
+            }
+        }
+        padding-left: rem(6px) ;
+    }
+}

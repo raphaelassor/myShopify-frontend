@@ -1,0 +1,49 @@
+.form-selection {
+    text-transform: capitalize;
+    svg {
+        &.MuiSvgIcon-root {
+            font-size: 18px;
+        }
+    }
+    .MuiFormGroup-root {
+        padding: rem(8px) rem(20px) rem(20px) rem(8px);
+        .MuiTypography-body1 {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+                "Helvetica Neue", sans-serif;
+            font-size: 14px;
+            line-height: 16px;
+        }
+        .MuiFormControlLabel-root {
+            align-items: center;
+            padding: 0.25rem 0;
+            span:last-child:not(.clear) {
+                margin-inline-start: 0.5rem;
+            }
+            &.clear {
+                margin-top: 0.5rem;
+                color: $stMuted;
+                svg {
+                    display: none;
+                }
+            }
+            &.active {
+                color: $link1;
+                cursor: pointer;
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+            .MuiSvgIcon-root {
+                width: rem(16px);
+                height: 16px;
+            }
+        }
+    }
+    .MuiIconButton-root {
+        padding:0;
+    }
+    .PrivateSwitchBase-root-1{
+        padding:0;
+        padding-inline-start: 0.4rem;
+    }
+}

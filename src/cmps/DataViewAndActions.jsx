@@ -8,24 +8,24 @@ import { useDispatch, useSelector } from "react-redux";
 import { setGlobalSelected } from "../store/actions/appActions";
 import { useRef } from "react";
 export const DataViewAndActions = ({ data, type, viewLayout }) => {
-    const dispatch=useDispatch()
-    const {systemSelectedData}=useSelector(state=>state.appModule)
-    const [selectedData, handleSelection, toggleSelection] = useSelection({...systemSelectedData})
+    const dispatch = useDispatch()
+    const { systemSelectedData } = useSelector(state => state.appModule)
+    const [selectedData, handleSelection, toggleSelection] = useSelection({ ...systemSelectedData })
     const selectedCount = useRef(null)
 
-    useEffect(()=>{
+    useEffect(() => {
         dispatch(setGlobalSelected(selectedData))
         selectedCount.current = getMapItemCount(selectedData)
-    },[selectedData])
-    
-    useEffect(()=>{
-        if(getMapItemCount(systemSelectedData)!==selectedCount.current){
-            selectedCount.current=0
+    }, [selectedData])
+
+    useEffect(() => {
+        if (getMapItemCount(systemSelectedData) !== selectedCount.current) {
+            selectedCount.current = 0
             toggleSelection([])
         }
-    },[systemSelectedData])
+    }, [systemSelectedData])
 
-    const getMapItemCount=(map)=>{
+    const getMapItemCount = (map) => {
         return Object.keys(map).length
     }
 
@@ -36,27 +36,27 @@ export const DataViewAndActions = ({ data, type, viewLayout }) => {
         toggleSelection(data)
     }
     const selectedModeClass = selectedCount.current ? 'selected-mode' : ''
-    
+
     const ViewCheckBox = () => {
         return <Checkbox className="select" checked={!!selectedCount.current}
-         onChange={toggleSelectAll} inputProps={{ 'aria-label': 'secondary checkbox' }} />
+            onChange={toggleSelectAll} inputProps={{ 'aria-label': 'secondary checkbox' }} />
     }
-    return (<>
+    return (<div className="data-view-actions">
         <div className={`data-actions-wrapper ${selectedModeClass}`} >
             <div className="flex btn-bar">
-            <button className=" btn-md btn-neutral relative">
-                <ViewCheckBox/>
-                <span> <span className="count">{selectedCount.current}</span> selected</span>
-            </button>
-            <DataActions type={type} data={systemSelectedData} />
+                <button className=" btn-md btn-neutral relative">
+                    <ViewCheckBox />
+                    <span> <span className="count">{selectedCount.current}</span> selected</span>
+                </button>
+                <DataActions type={type} data={systemSelectedData} />
             </div>
         </div>
 
         <div className="table-container">
             <table className={selectedModeClass}>
                 <thead >
-                    <tr>
-                        <th><ViewCheckBox/></th>
+                    <tr className="header">
+                        <th><ViewCheckBox /></th>
                         {viewLayout.map(title => <th key={utilService.makeId()}>{title}</th>)}
                     </tr>
                 </thead>
@@ -68,6 +68,6 @@ export const DataViewAndActions = ({ data, type, viewLayout }) => {
                 </tbody>
             </table>
         </div>
-    </>
+    </div>
     )
 }

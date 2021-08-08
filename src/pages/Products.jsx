@@ -7,14 +7,14 @@ import { PRODUCT_TYPE, statusNames } from "../services/settings";
 import { DataViewAndActions } from "../cmps/DataViewAndActions";
 import { productService } from "../services/productService";
 import { useForm } from "../services/hooks/customHooks";
+import { DataNav } from "../cmps/DataNav";
 export function ProductsPage() {
     const dispatch=useDispatch()
     const {products}=useSelector(state=>state.productModule)
-    const shop=useSelector(state=>state.shopModule)
-    const [filterBy,handleChange]=useForm(productService.getProductsFilter())
+    const {productTags,productTypes,vendors}=useSelector(state=>state.shopModule)
     
     useEffect(() => {
-        dispatch(loadProducts(filterBy))
+        dispatch(loadProducts())
     }, [])
  
     const onSetFilter=(filterBy)=>{
@@ -28,12 +28,12 @@ export function ProductsPage() {
         {
             title:'Product Vendor',
             type:'vendor',
-            options:shop.vendors
+            options:vendors
         },
         {
-            title:'Tagged With',
+            title:'Tag',
             type:'tags',
-            options:shop.productTags
+            options:productTags
         },
         {
             title:'Status',
@@ -43,7 +43,7 @@ export function ProductsPage() {
         {
             title:'Product Type',
             type:'type',
-            options:shop.productTypes
+            options:productTypes
         }
 
     ]
@@ -55,13 +55,8 @@ export function ProductsPage() {
             <Link to="#" className="btn-md btn-primary">Add product</Link>
         </div>
         <div className="page-surface">
-            <ul className="clean-list flex">
-                <li>All</li>
-                <li>Active</li>
-                <li>Archive</li>
-                <li>Draft</li>
-            </ul>
-            <DataFilter type={PRODUCT_TYPE} filter={filterBy} data={filterData} />
+            <DataNav data={filterData[2]} baseUrl="products" />
+            <DataFilter cbAfterFilter={onSetFilter} data={filterData} />
             <DataViewAndActions data={products} type={PRODUCT_TYPE} viewLayout={productViewLayout} cbAfterFilter={onSetFilter} />
         </div>
     </div>

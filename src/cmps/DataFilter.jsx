@@ -1,63 +1,92 @@
-import IconClose from '@material-ui/icons/Clear';
-import ExpandLessIcon from '@material-ui/icons/ExpandLess';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
+
 import { useEffect, useState } from 'react';
 import { useForm } from '../services/hooks/customHooks';
+import { Snippet } from './Snippet';
+import { FilterDialog } from './FilterDialog'
+import { utilService } from '../services/utilService';
+import { useDispatch } from 'react-redux';
+import { openDialog } from '../store/actions/appActions';
+import { SINGLE_SELECT_POPOVER } from '../services/settings';
+import { useLocation } from 'react-router';
+import { DataLoader } from './DataLoader';
+import SearchIcon from '@material-ui/icons/Search';
 
-export const DataFilter = ({ data }) => {
-    const [filterClass, setFilterClass] = useState('')
-    const [expandedIdx, setFilterOption] = useState(-1)
-    const [filter, handleChange] = useForm(buildFilterFromData())
+export const DataFilter = ({ data, cbAfterFilter }) => {
+    const dispatch = useDispatch()
+    const [isDialogOpen, setDialog] = useState(false)
+    const [filter, handleChange, setFilter, isFilterEmpty] = useForm(buildEmptyFilter(), cbAfterFilter)
+    const location = useLocation()
+    useEffect(() => {
+        updateFilterToParams()
+    }, [location])
 
-    const ExpandContract = ({ optionIdx }) => {
-        return expandedIdx === optionIdx ? <ExpandLessIcon /> : <ExpandMoreIcon />
+    const updateFilterToParams = () => {
+        if (location.search) {
+            const params = new URLSearchParams(location.search)
+            for (let param of params) {
+                const key = param[0]
+                const val = param[1]
+                if (filter.hasOwnProperty(key)) {
+                    if (param[1] === 'all') resetFilter(key)
+                    else setFilter(prevFields => ({ ...prevFields, [key]: val }))
+                }
+                break
+            }
+        }
     }
-    const handleClick = (idx) => {
-        expandedIdx === idx ? setFilterOption(-1) : setFilterOption(idx)
+    const resetFilter = (type = undefined) => {
+        !type ? setFilter(buildEmptyFilter()) :
+            setFilter(prevFields => ({ ...prevFields, [type]: '' }))
     }
-    function buildFilterFromData(){
-        const filter = data.reduce((acc, filterOption) => {
+    const closeDialog = () => {
+        setDialog(false)
+    }
+    const onOpenPopover = (ev, item) => {
+        const props = {
+            handleChange,
+            form: filter,
+            item,
+            elPos: ev.target.getBoundingClientRect()
+        }
+        dispatch(openDialog(SINGLE_SELECT_POPOVER, props))
+    }
+
+    function buildEmptyFilter() {
+        const emptyFilter = data.reduce((acc, filterOption) => {
             acc[filterOption.type] = ''
             return acc
         }, {})
-        return filter
+        return emptyFilter
     }
 
-    return <> <div className="data-filter flex justify-space-between">
-        <input type="text" placeholder="i am a filter " />
+    return <>
+    <div className="data-filter">
         <div className="flex filter-preview">
+            <div className="search-container flex">
+            <SearchIcon/>
+            <input type="text" placeholder="Search..." name="term" value={filter.term||''} onChange={handleChange} />
+            </div>
             <div className="flex btn-bar">
-                <button className="btn-md btn-neutral">Product Vendor</button>
-                <button className="btn-md btn-neutral">Tagged With</button>
-                <button className="btn-md btn-neutral">Status</button>
-                <button onClick={() => setFilterClass('expand')} className="btn-md btn-neutral">More Filters</button>
+                {data.slice(0, 3).map(item => {
+                    return <button key={utilService.makeId()} onClick={(ev) => onOpenPopover(ev, item)}
+                        className="btn-md btn-neutral">{item.title}</button>
+                })}
+                <button onClick={() => setDialog(true)}
+                    className={`btn-md btn-neutral ${!isFilterEmpty ? 'active' : ''}`}>More Filters</button>
             </div>
             <button className="btn-md btn-neutral"> Sort</button>
         </div>
-    </div>
-        <div className={`more-filters ${filterClass}`}>
-            <h2 className="flex justify-space-between">More Filters <span onClick={()=>setFilterClass('')}><IconClose /></span></h2>
-            <hr />
-            {data.map((item, idx) => {
-                return <>
-                    <div onClick={() => handleClick(idx)}>
-                        <h4>{item.title}</h4>
-                        <span><ExpandContract optionIdx={idx} /></span>
-                    </div>
-                    {expandedIdx === idx && <div className="options">
-                        <RadioGroup name={item.type} value={filter[item.type]} onChange={handleChange}>
-                            {item.options.map(option => {
-                                return <FormControlLabel value={option} control={<Radio />} label={option} />
-                            })}
-                        </RadioGroup>
-                    </div>}
-                </>
-            })}
+        <DataLoader />
+        <div className="filter-snippets">
+            {!isFilterEmpty &&
+                data.filter(item => !!filter[item.type])
+                    .map(item => {
+                        return <Snippet handleChange={() => resetFilter(item.type)} remove={true}>
+                            {item.title} is {filter[item.type]}</Snippet>
+                    })}
         </div>
+    </div>
+        <FilterDialog data={data} filter={filter} hide={closeDialog} isEmpty={isFilterEmpty}
+            isOpen={isDialogOpen} resetFilter={resetFilter} handleChange={handleChange} />
     </>
 } 

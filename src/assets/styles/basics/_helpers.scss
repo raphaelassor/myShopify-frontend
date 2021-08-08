@@ -133,3 +133,9 @@ h1,h2,h3,h4{
 .page-header{
     margin-bottom: rem(16px);
 }
+.snippet{
+    font-size: 12px;
+    padding: 4px;
+    background-color: $stMuted;
+    border-radius: $brdRad1;
+}

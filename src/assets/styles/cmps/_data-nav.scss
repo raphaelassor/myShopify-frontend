@@ -1,0 +1,45 @@
+.data-nav {
+    border-bottom: 1px solid $brd1;
+    padding-inline-start: 1rem;
+    a {
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+        transition: 0.2s;
+        span {
+            padding: 15px 16px;
+            color: #6d7175;
+            font-size: 14px;
+            text-transform: capitalize;
+        }
+        &:hover,
+        &.active {
+            span {
+                color: #202223;
+            }
+            &::after {
+                content: "";
+                height: 3px;
+                width: 85%;
+                background-color: $clr5;
+                border-top-right-radius: 3px;
+                border-top-left-radius: 3px;
+            }
+        }
+        &:hover {
+            text-decoration: none;
+            &:not(.active) {
+                &::after {
+                    background-color: $clr4;
+                }
+            }
+        }
+        &.active {
+            svg {
+                path {
+                    fill: $clr5;
+                }
+            }
+        }
+    }
+}

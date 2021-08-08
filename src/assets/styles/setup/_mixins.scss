@@ -90,17 +90,21 @@
     line-height: rem(20px);
     width: rem(20px);
 }
+@mixin iconLg{
+    height: rem(20px);
+    line-height: rem(20px);
+    width: rem(20px);
+}
 @mixin centerAllInside {
     display: flex;
     text-align: center;
     align-items: center;
     justify-content: center;
 }
-@mixin secondary-title{
-    font-size: rem(14px);
-    font-weight: 400;
-    line-height: rem(20px);
-    flex-grow: 1;
+@mixin secondary-title($pixel:14px,$weight:400){
+    font-size: rem($pixel);
+    font-weight: $weight;
+    line-height: rem($pixel);
     letter-spacing: rem(1px);
     font-family: 'SF Pro';
 }

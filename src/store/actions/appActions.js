@@ -1,21 +1,19 @@
 
 export function initLoading() {
-    console.log('init loading')
     return dispatch => {
-        dispatch({ type: 'LOADING_INIT' })
+        dispatch({ type: 'INIT_LOADING' })
     }
 }
 
 export function endLoading() {
-    console.log('end loading')
     return dispatch => {
-        dispatch({ type: 'LOADING_END' })
+        dispatch({ type: 'END_LOADING' })
     }
 }
 
 export function setError(e) {
     return dispatch => {
-        dispatch({ type: 'SET_MODAL', msg: e })
+        dispatch({ type: 'SET_DIALOG', msg: e })
     }
 }
 
@@ -29,20 +27,22 @@ export function unsetGlobalSelected(){
         dispatch({type:'SET_SELECTED_DATA',selectedData:{}})
     }
 }
-export function openModal(modalName,props){
+export function openDialog(dialogName,props){
     
     return dispatch =>{
         dispatch({
-            type:'SET_MODAL',
-            modal:{
-                name:modalName,
+            type:'SET_DIALOG',
+            dialog:{
+                name:dialogName,
                 props
             }
         })
     }
 }
-export function closeModal(){
+export function closeDialog(){
     return dispatch=>{
-        dispatch({type:'UNSET_MODAL'})
+        dispatch({type:'UNSET_DIALOG'})
     }
 }
+
+

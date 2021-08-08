@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux"
 import { loadProducts, removeManyProducts, updateManyProducts } from "../store/actions/productActions"
-import { TAGS_EDIT_MODAL, ADD_TAGS_MODE, REMOVE_TAGS_MODE, statusNames } from '../services/settings'
-import { openModal,closeModal} from "../store/actions/appActions"
+import {  statusNames } from '../services/settings'
+import { closeDialog} from "../store/actions/appActions"
 import { shopService } from "../services/shopService"
 import { CommonDataActions } from "./CommonDataActions"
 
@@ -25,7 +25,7 @@ export const ProductViewActions = ({ products }) => {
     const addTagsToProducts = (tagsToAdd) => {
         //VERIFY ALL TAGS EXIST IN SHOPS. IF NOT - ADD AND PATCH SHOP
         shopService.addTagsToEntities(tagsToAdd, products)
-        dispatch(closeModal())
+        dispatch(closeDialog())
         //HAVE TO LEARN MORE ABOUT CHAINING PROMISES. 
         //I NEED TO KNOW WHEN THE ACTION IS SUCCESSFUL TO CLOSE THE MODAL ONLY THEN
         dispatchUpdate()
@@ -33,7 +33,7 @@ export const ProductViewActions = ({ products }) => {
 
     const removeTagsFromProducts = (tagsToRemove) => {
         shopService.removeTagsFromEntities(tagsToRemove, products)
-        dispatch(closeModal())
+        dispatch(closeDialog())
         dispatchUpdate()
     }
 
@@ -46,7 +46,7 @@ export const ProductViewActions = ({ products }) => {
 
     return (<>
         <CommonDataActions remove={removeProducts} tags={productTags} 
-        addtags={addTagsToProducts} removeTags={removeTagsFromProducts} />
+        addTags={addTagsToProducts} removeTags={removeTagsFromProducts} />
         <button onClick={() => editStatus(statusNames.archive)} className="btn-md btn-neutral">Archive</button>
         <button onClick={() => editStatus(statusNames.active)} className="btn-md btn-neutral">Set Active</button>
         <button onClick={() => editStatus(statusNames.draft)} className="btn-md btn-neutral">Set Draft</button>

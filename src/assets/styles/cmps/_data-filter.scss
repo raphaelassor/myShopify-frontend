@@ -1,37 +1,108 @@
 .data-filter {
-    padding: 16px ;
-    &>input{ 
-        flex-grow: 1;
-        border-radius:$brdRad1;
-        padding:6px 12px 6px 0;
-        border:1px solid $brd2;
-    }
-    .filter-preview{
-        margin-inline-start: 1rem;
-        &>button{
+    margin: 16px;
+    position: relative;
+    .filter-preview {
+        margin-bottom: 0.5rem;
+        position: relative;
+        z-index: 5;
+        .search-container{
+            flex-grow: 1;
+            border-radius: $brdRad1;
+            padding: 6px 12px 6px 0;
+            border: 1px solid $brd2; 
+            margin-inline-end: 1rem;
+            input {
+                flex-grow: 1;
+                outline: none;
+                border: none;
+            }
+            svg{
+                margin: 0 0.25rem;
+            }
+        }
+        & > button {
             margin-inline-start: 1rem;
         }
+        button{
+            &.active{
+                background-color: #f6f6f7
+            }
+        }
+      
+        
     }
 }
-.more-filters{
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    display: none;
+    &.expand {
+        display: block;
+    }
+}
+.more-filters {
     position: fixed;
     height: 100vh;
     background-color: white;
-    right:0;
-    top:0;
-    padding: 10px;
+    right: 0;
+    top: 0;
     transform: translateX(100%);
-    width:300px;
-    transition: .3s;
-    &.expand{
+    width: rem(380px);
+    max-width: 90vw;
+    transition: 0.3s;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 0 1px rgba(63, 63 ,68 ,0.05), -7px -1px 10px 0 rgba(63, 63, 68 , 0.15);
+    &.expand {
         transform: translateX(0%);
     }
-    .options{
-        padding: 5px;
-        svg{
-            &.MuiSvgIcon-root{
-                font-size: 18px;
+    h2 {
+        padding: rem(16px) rem(20px);
+        @include secondary-title(20px, 400);
+    }
+    .body {
+        padding: rem(8px);
+        flex-grow: 1;
+        .filter-type {
+            padding: rem(14px) rem(20px);
+            cursor: pointer;
+            border-radius: $brdRad1;
+            align-items: center;
+            &:hover {
+                background-color: $clr1;
+            }
+            div {
+                &:first-child {
+                    @include secondary-title(15px, 500);
+                }
+            }
+            svg {
+                transition: transform 0.3s ease;
+                @include iconLg;
+            }
+            &.active {
+                background-color: $clr1;
+                svg {
+                    transform: rotate(180deg);
+                }
             }
         }
+        .options {
+            overflow: hidden;
+            max-height: 0;
+            transition: max-height 0.3s ease;
+            padding: 0 20px;
+           
+            &.active {
+                max-height: 180px;
+            }
+        }
+    }
+    .footer{
+        padding: rem(14px) rem(20px);
     }
 }

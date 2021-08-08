@@ -1,34 +1,26 @@
 const initialState = {
   isLoading: false,
   systemSelectedData: {},
-  modal: {
+  dialog: {
     name: '',
     props: {}
   },
-  popover: {
-    name: '',
-    props: {},
-    elPos: null
-  }
+
 
 };
 
 export function appReducer(state = initialState, action = {}) {
   switch (action.type) {
-    case 'LOADING_INIT':
+    case 'INIT_LOADING':
       return { ...state, isLoading: true }
-    case 'LOADING_DONE':
+    case 'END_LOADING':
       return { ...state, isLoading: false }
     case 'SET_SELECTED_DATA':
       return { ...state, systemSelectedData: action.selectedData }
-    case 'SET_MODAL':
-      return { ...state, modal: action.modal }
-    case 'UNSET_MODAL':
-      return { ...state, modal: { name: '', props: {} } }
-    case 'SET_POPOVER':
-      return { ...state, popover: action.modal }
-    case 'UNSET_POPOVER':
-      return { ...state, popover: { name: '', props: {}, elPos: {} } }
+    case 'SET_DIALOG':
+      return { ...state, dialog: action.dialog }
+    case 'UNSET_DIALOG':
+      return { ...state, dialog: { name: '', props: {} } }
     default: return state
   }
 }
