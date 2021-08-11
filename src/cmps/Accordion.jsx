@@ -1,5 +1,4 @@
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { utilService } from '../services/utilService';
 import { FormSingleSelect } from './FormSingleSelect';
 
 import { Snippet } from './Snippet';
@@ -21,8 +20,8 @@ export const Accordion = ({ data, onSelect, selectedItem, handleChange, filter }
                 <div className={`options ${activeClass}`}>
                     <FormSingleSelect handleChange={handleChange} form={filter} item={item} />
                 </div>
-                </>
-            
-})}
+            </>
+
+        })}
     </>
 }

@@ -10,7 +10,7 @@ export const productService = {
     removeManyProductsById,
     getProductById,
     saveProduct,
-    updateManyProducts,
+    patchProducts,
     getEmptyProduct,
     getProductsFilter,
 }
@@ -40,9 +40,10 @@ async function getProductById(productId) {
     }
 }
 
-async function updateManyProducts(products) {
+async function patchProducts(patch) {
+    const query=patch.action? `?action=${action}`:''
     try {
-        // return await httpService.put(`product/`, products)
+        // return await httpService.patch(`product${query}`, products)
         return await storageService.putMany('product', products)
     } catch (err) {
         throw err

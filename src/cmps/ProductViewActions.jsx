@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux"
-import { loadProducts, removeManyProducts, updateManyProducts } from "../store/actions/productActions"
+import { loadProducts, removeManyProducts, patchProducts } from "../store/actions/productActions"
 import {  statusNames } from '../services/settings'
 import { closeDialog} from "../store/actions/appActions"
 import { shopService } from "../services/shopService"
@@ -16,37 +16,45 @@ export const ProductViewActions = ({ products }) => {
     }
    
     const editStatus = async (statusName) => {
-        for (let productId in products) {
-            products[productId].status = statusName
-        }
-        dispatchUpdate()
+       const patch={
+           ids:products.map(product=>product._id),
+           status:statusName
+       }
+        dispatchUpdate(patch)
     }
 
-    const addTagsToProducts = (tagsToAdd) => {
-        //VERIFY ALL TAGS EXIST IN SHOPS. IF NOT - ADD AND PATCH SHOP
-        shopService.addTagsToEntities(tagsToAdd, products)
-        dispatch(closeDialog())
-        //HAVE TO LEARN MORE ABOUT CHAINING PROMISES. 
-        //I NEED TO KNOW WHEN THE ACTION IS SUCCESSFUL TO CLOSE THE MODAL ONLY THEN
-        dispatchUpdate()
-    }
+    // const addTagsToProducts = (tagsToAdd) => {
+    //     //VERIFY ALL TAGS EXIST IN SHOPS. IF NOT - ADD AND PATCH SHOP
+    //     // shopService.addTagsToEntities(tagsToAdd, products)
+    //     // dispatchUpdate()
+    //     // dispatch(closeDialog())
+    //     patchTags(tagsToAdd,'add')
+    // }
 
-    const removeTagsFromProducts = (tagsToRemove) => {
-        shopService.removeTagsFromEntities(tagsToRemove, products)
-        dispatch(closeDialog())
-        dispatchUpdate()
-    }
+    // const removeTagsFromProducts = (tagsToRemove) => {
+    //     patchTags(tagsToRemove,'remove')
+    // }
+
+    // const patchTags=(tags,action)=>{
+    //     const patch={
+    //         ids:products.map(product=>product._id),
+    //         tags,
+    //         action
+    //     }
+    //     dispatchUpdate(patch)
+    //     dispatch(closeDialog())
+    // }
 
     const cbLoadProductsWithFilter = () => {
         return loadProducts(filterBy)
     }
-    const dispatchUpdate = () => {
-        dispatch(updateManyProducts(products, cbLoadProductsWithFilter))
+    const dispatchUpdate = (patch) => {
+        dispatch(patchProducts(patch, cbLoadProductsWithFilter))
     }
 
     return (<>
         <CommonDataActions remove={removeProducts} tags={productTags} 
-        addTags={addTagsToProducts} removeTags={removeTagsFromProducts} />
+        update={dispatchUpdate} entities={products}/>
         <button onClick={() => editStatus(statusNames.archive)} className="btn-md btn-neutral">Archive</button>
         <button onClick={() => editStatus(statusNames.active)} className="btn-md btn-neutral">Set Active</button>
         <button onClick={() => editStatus(statusNames.draft)} className="btn-md btn-neutral">Set Draft</button>

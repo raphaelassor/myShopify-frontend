@@ -24,10 +24,10 @@ export function removeManyProducts(productIds,cbLoadProducts){
     }
 }
 
-export function updateManyProducts(products,cbLoadProducts){
+export function patchProducts(products,cbLoadProducts){
     return async dispatch=>{
         dispatch(initLoading())
-        await productService.updateManyProducts(products)
+        await productService.patchProducts(products)
         dispatch(cbLoadProducts())
     }
 }
