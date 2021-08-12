@@ -1,7 +1,9 @@
-<h1>Quick Setup</h1> 
+<h1>Quick Setup</h1>
+
 ```
 git clone https://github.com/raphaelassor/myShopify-frontend.git
 ```
+
 2. Enter the backend folder and make sure you have node_modules installed. After that we will initiate the server with 'npm start' 
 
 ```
