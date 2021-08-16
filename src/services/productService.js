@@ -1,6 +1,6 @@
 
 import { httpService } from './httpService'
-
+import axios from 'axios'
 import { storageService } from './asyncStorageService'
 import { statusNames } from './settings'
 import { utilService } from './utilService'
@@ -26,10 +26,10 @@ async function saveProduct(product) {
 
 async function queryProducts(filterBy) {
     const query=utilService.buildQueryStr(filterBy)
-    console.log(query)
+    console.log('query is:', query)
     try {
-        // return await httpService.get('products${query}')
-        return await storageService.query('product')
+        return await httpService.get(`products${query}`)
+        // return await storageService.query('product')
     } catch (err) {
         throw err
     }
@@ -44,9 +44,9 @@ async function getProductById(productId) {
 }
 
 async function patchProducts(patch) {
-    
     try {
-        // return await httpService.patch('products', patch)
+        return await httpService.patch('products', patch)
+        // return await axios.patch('//localhost:3030/api/products',patch)
         // return await storageService.putMany('product', products)
     } catch (err) {
         throw err
@@ -63,8 +63,8 @@ async function removeProductById(productId) {
 
 async function removeManyProductsById(productIds) {
     try {
-        // await httpService.delete(`product`,productIds)
-        await storageService.removeMany(`product`, productIds)
+        await httpService.delete(`products`,productIds)
+        // await storageService.removeMany(`product`, productIds)
     } catch (err) {
         throw err
     }

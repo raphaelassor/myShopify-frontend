@@ -13,7 +13,7 @@ export function loadProducts(filterBy={}){
         }catch (e){
             setError(e)
         } 
-    }
+    } 
 }
 
 export function removeManyProducts(productIds,cbLoadProducts){
@@ -24,10 +24,10 @@ export function removeManyProducts(productIds,cbLoadProducts){
     }
 }
 
-export function patchProducts(products,cbLoadProducts){
+export function patchProducts(patch,cbLoadProducts){
     return async dispatch=>{
         dispatch(initLoading())
-        await productService.patchProducts(products)
+        await productService.patchProducts(patch)
         dispatch(cbLoadProducts())
     }
 }

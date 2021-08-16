@@ -11,8 +11,9 @@ import { useHistory, useLocation } from 'react-router';
 import { DataLoader } from './DataLoader';
 import SearchIcon from '@material-ui/icons/Search';
 import queryString from 'query-string'
+import { FilterSnippets } from './FilterSnippets';
 
-export const DataFilter = ({ filterData, cbAfterFilter,sortData }) => {
+export const DataFilter = ({ filterData, cbAfterFilter, sortData }) => {
 
     const dispatch = useDispatch()
     const [isDialogOpen, setDialog] = useState(false)
@@ -23,8 +24,8 @@ export const DataFilter = ({ filterData, cbAfterFilter,sortData }) => {
     }, [location])
 
     const updateFilterToParams = () => {
-        const filterQuery=queryString.parse(location.search)
-        if(filterQuery.status==='all')filterQuery.status=''
+        const filterQuery = queryString.parse(location.search)
+        if (filterQuery.status === 'all') filterQuery.status = ''
         setFilter(prevFields => ({ ...prevFields, ...filterQuery }))
     }
 
@@ -41,7 +42,7 @@ export const DataFilter = ({ filterData, cbAfterFilter,sortData }) => {
         const props = {
             handleChange,
             form: filter,
-            formItem:filterItem,
+            formItem: filterItem,
             elPos: ev.target.getBoundingClientRect()
         }
         dispatch(openDialog(SINGLE_SELECT_POPOVER, props))
@@ -68,19 +69,12 @@ export const DataFilter = ({ filterData, cbAfterFilter,sortData }) => {
                             className="btn-md btn-neutral">{item.typeTitle}</button>
                     })}
                     <button onClick={() => setDialog(true)}
-                        className={`btn-md btn-neutral ${!isFilterEmpty ? 'active' : ''}`}>More Filters</button>
+                        className="btn-md btn-neutral">More Filters</button>
                 </div>
                 <button onClick={(ev) => onOpenPopover(ev, sortData)} className="btn-md btn-neutral"> Sort</button>
             </div>
             <DataLoader />
-            <div className="filter-snippets">
-                {!isFilterEmpty &&
-                    filterData.filter(item => !!filter[item.type])
-                        .map(item => {
-                            return <Snippet handleChange={() => resetFilter(item.type)} remove={true}>
-                                {item.typeTitle} is {filter[item.type]}</Snippet>
-                        })}
-            </div>
+            <FilterSnippets filterData={filterData} filter={filter} resetFilter={resetFilter} />
         </div>
         <FilterDialog data={filterData} filter={filter} hide={closeDialog} isEmpty={isFilterEmpty}
             isOpen={isDialogOpen} resetFilter={resetFilter} handleChange={handleChange} />

@@ -6,14 +6,14 @@ import { utilService } from '../../services/utilService'
 import { Snippet } from '../Snippet'
 import { BaseModal } from './BaseModal'
 
-export const TagsEditModal = ({ mode, updateTags, tags }) => {
+export const TagsEditModal = ({ mode, updateTags, tagsToShow }) => {
     const [form, handleChange] = useForm({ tagName: '' })
     const [selectedTags, handleSelection] = useSelection([])
 
     const filteredTags = useMemo(() => {
         const regex = new RegExp(form.tagName, 'i')
-        return tags.filter(tag => regex.test(tag) && !selectedTags.includes(tag))
-    }, [tags, form.tagName, selectedTags])
+        return tagsToShow.filter(tag => regex.test(tag) && !selectedTags.includes(tag))
+    }, [tagsToShow, form.tagName, selectedTags])
 
     const isAdd = mode === ADD_TAGS_MODE
     const actionType = isAdd ? 'Add' : 'Remove'

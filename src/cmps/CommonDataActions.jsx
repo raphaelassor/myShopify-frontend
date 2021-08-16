@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux"
 import { ADD_TAGS_MODE, REMOVE_TAGS_MODE,TAGS_EDIT_MODAL } from "../services/settings"
 import { closeDialog, openDialog } from "../store/actions/appActions"
 
-export const CommonDataActions = ({tags,remove,entitiesMap,update}) => {
+export const CommonDataActions = ({tagsToShow,remove,entitiesMap,update}) => {
 
     const dispatch=useDispatch()
     const addTags = (tagsToAdd) => {
@@ -17,11 +17,11 @@ export const CommonDataActions = ({tags,remove,entitiesMap,update}) => {
         patchTags(tagsToRemove,'remove')
     }
 
-    const patchTags=(tags,action)=>{
+    const patchTags=(tagsToPatch,action)=>{
         const patch={
             ids:Object.keys(entitiesMap),
             field:'tags',
-            val:tags,
+            value:tagsToPatch,
             action
         }
         update(patch)
@@ -41,7 +41,7 @@ export const CommonDataActions = ({tags,remove,entitiesMap,update}) => {
                 cb(tagsToUpdate)
             },
             mode,
-            tags
+            tagsToShow
         }
         return props
     }

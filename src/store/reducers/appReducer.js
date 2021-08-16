@@ -5,8 +5,10 @@ const initialState = {
     name: '',
     props: {}
   },
-
-
+  criteria:{
+    skip:0,
+    limit:25
+  }
 };
 
 export function appReducer(state = initialState, action = {}) {
@@ -21,6 +23,8 @@ export function appReducer(state = initialState, action = {}) {
       return { ...state, dialog: action.dialog }
     case 'UNSET_DIALOG':
       return { ...state, dialog: { name: '', props: {} } }
+      case 'UPDATE_CRITERIA':
+        return {...state, criteria:{...state.criteria,...action.update}}
     default: return state
   }
 }

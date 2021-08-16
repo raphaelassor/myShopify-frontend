@@ -7,7 +7,7 @@ import { CommonDataActions } from "./CommonDataActions"
 
 export const ProductViewActions = ({ productsMap }) => {
     const dispatch = useDispatch()
-    const { filterBy } = useSelector(state => state.productModule)
+    const { criteria } = useSelector(state => state.appModule)
     const {productTags} = useSelector(state => state.shopModule)
     
     const removeProducts = async () => {
@@ -19,7 +19,7 @@ export const ProductViewActions = ({ productsMap }) => {
        const patch={
            ids:Object.keys(productsMap),
            field:'status',
-           val:statusName
+           value:statusName
        }
         dispatchUpdate(patch)
         dispatch(closeDialog())
@@ -48,14 +48,14 @@ export const ProductViewActions = ({ productsMap }) => {
     // }
 
     const cbLoadProductsWithFilter = () => {
-        return loadProducts(filterBy)
+        return loadProducts(criteria)
     }
     const dispatchUpdate = (patch) => {
         dispatch(patchProducts(patch, cbLoadProductsWithFilter))
     }
 
     return (<>
-        <CommonDataActions remove={removeProducts} tags={productTags} 
+        <CommonDataActions remove={removeProducts} tagsToShow={productTags} 
         update={dispatchUpdate} entitiesMap={productsMap}/>
         <button onClick={() => editStatus(statusNames.archive)} className="btn-md btn-neutral">Archive</button>
         <button onClick={() => editStatus(statusNames.active)} className="btn-md btn-neutral">Set Active</button>

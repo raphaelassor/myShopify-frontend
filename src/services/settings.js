@@ -4,7 +4,7 @@ export const statusNames = {
     active: 'active',
 }
 
-export const PRODUCT_TYPE = 'PRODUCT'
+
 export const ORDER_TYPE = 'ORDER'
 export const CUSTOMER_TYPE = 'COLLECTION'
 

@@ -1,6 +1,6 @@
 import { DataPreview } from "./DataPreview"
 import Checkbox from '@material-ui/core/Checkbox';
-import { DataActions } from "./DataActions";
+import { DynamicDataActions } from "./DynamicDataActions";
 import { utilService } from "../services/utilService";
 import { useSelection } from '../services/hooks/useSelection'
 import { useEffect } from "react";
@@ -49,7 +49,7 @@ export const DataViewAndActions = ({ data, type, viewLayout,sort }) => {
                     <ViewCheckBox />
                     <span> <span className="count">{selectedCount.current}</span> selected</span>
                 </button>
-                <DataActions type={type} data={systemSelectedData} />
+                <DynamicDataActions type={type} data={systemSelectedData} />
             </div>
         </div>
 
@@ -66,6 +66,9 @@ export const DataViewAndActions = ({ data, type, viewLayout,sort }) => {
                         return <DataPreview entity={dataEntity} type={type} key={dataEntity._id}
                             isSelected={checkIsSelected(dataEntity)} handleChange={() => handleSelection(dataEntity)} />
                     })}
+                    {!data.length&&
+                    <tr><td>No data to display...</td></tr>
+                    }
                 </tbody>
             </table>
         </div>

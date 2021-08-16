@@ -44,5 +44,10 @@ export function closeDialog(){
         dispatch({type:'UNSET_DIALOG'})
     }
 }
+export function updateCriteria(update){
+    return dispatch=>{
+        dispatch({type:'UPDATE_CRITERIA',update})
+    }
+}
 
 

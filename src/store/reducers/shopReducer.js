@@ -1,5 +1,4 @@
 const initialState = {
-    
         domains: [],
         title: '',
         productTypes: [],

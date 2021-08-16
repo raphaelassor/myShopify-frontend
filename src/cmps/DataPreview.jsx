@@ -1,4 +1,4 @@
-import { PRODUCT_TYPE } from "../services/settings"
+import { PRODUCT_TYPE } from "../services/settings/productSettings"
 import { ProductPreview } from "./ProductPreview"
 
 export const DataPreview = (props) => {
