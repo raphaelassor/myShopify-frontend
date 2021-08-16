@@ -1,7 +1,7 @@
 import {productService} from '../../services/productService'
 import { endLoading, initLoading,setError, unsetGlobalSelected } from './appActions'
 
-export function loadProducts(filterBy){
+export function loadProducts(filterBy={}){
     return async dispatch=>{
         try{
             dispatch(initLoading())

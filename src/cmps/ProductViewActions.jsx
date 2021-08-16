@@ -5,22 +5,24 @@ import { closeDialog} from "../store/actions/appActions"
 import { shopService } from "../services/shopService"
 import { CommonDataActions } from "./CommonDataActions"
 
-export const ProductViewActions = ({ products }) => {
+export const ProductViewActions = ({ productsMap }) => {
     const dispatch = useDispatch()
     const { filterBy } = useSelector(state => state.productModule)
     const {productTags} = useSelector(state => state.shopModule)
     
     const removeProducts = async () => {
-        const productIds = Object.keys(products)
+        const productIds = Object.keys(productsMap)
         dispatch(removeManyProducts(productIds, cbLoadProductsWithFilter))
     }
    
     const editStatus = async (statusName) => {
        const patch={
-           ids:products.map(product=>product._id),
-           status:statusName
+           ids:Object.keys(productsMap),
+           field:'status',
+           val:statusName
        }
         dispatchUpdate(patch)
+        dispatch(closeDialog())
     }
 
     // const addTagsToProducts = (tagsToAdd) => {
@@ -54,7 +56,7 @@ export const ProductViewActions = ({ products }) => {
 
     return (<>
         <CommonDataActions remove={removeProducts} tags={productTags} 
-        update={dispatchUpdate} entities={products}/>
+        update={dispatchUpdate} entitiesMap={productsMap}/>
         <button onClick={() => editStatus(statusNames.archive)} className="btn-md btn-neutral">Archive</button>
         <button onClick={() => editStatus(statusNames.active)} className="btn-md btn-neutral">Set Active</button>
         <button onClick={() => editStatus(statusNames.draft)} className="btn-md btn-neutral">Set Draft</button>

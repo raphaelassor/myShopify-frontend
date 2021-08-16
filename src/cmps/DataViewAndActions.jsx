@@ -7,7 +7,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setGlobalSelected } from "../store/actions/appActions";
 import { useRef } from "react";
-export const DataViewAndActions = ({ data, type, viewLayout }) => {
+export const DataViewAndActions = ({ data, type, viewLayout,sort }) => {
     const dispatch = useDispatch()
     const { systemSelectedData } = useSelector(state => state.appModule)
     const [selectedData, handleSelection, toggleSelection] = useSelection({ ...systemSelectedData })
@@ -35,6 +35,7 @@ export const DataViewAndActions = ({ data, type, viewLayout }) => {
     const toggleSelectAll = () => {
         toggleSelection(data)
     }
+
     const selectedModeClass = selectedCount.current ? 'selected-mode' : ''
 
     const ViewCheckBox = () => {
@@ -57,7 +58,7 @@ export const DataViewAndActions = ({ data, type, viewLayout }) => {
                 <thead >
                     <tr className="header">
                         <th><ViewCheckBox /></th>
-                        {viewLayout.map(title => <th key={utilService.makeId()}>{title}</th>)}
+                        {viewLayout.map(title=> <th key={utilService.makeId()}>{title}</th>)}
                     </tr>
                 </thead>
                 <tbody>

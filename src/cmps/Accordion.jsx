@@ -9,16 +9,16 @@ export const Accordion = ({ data, onSelect, selectedItem, handleChange, filter }
             return <>
                 <div className={`filter-type ${activeClass}`} onClick={() => onSelect(idx)} >
                     <div className="flex justify-space-between align-center">
-                        <span>{item.title}</span>
+                        <span>{item.typeTitle}</span>
                         <span><ExpandMoreIcon /></span>
                     </div>
                     {filter[item.type] && !activeClass &&
                         <Snippet handleChange={() => { }}>
-                            {item.title} is {filter[item.type]}
+                            {item.typeTitle} is {filter[item.type]}
                         </Snippet>}
                 </div>
                 <div className={`options ${activeClass}`}>
-                    <FormSingleSelect handleChange={handleChange} form={filter} item={item} />
+                    <FormSingleSelect handleChange={handleChange} form={filter} formItem={item} />
                 </div>
             </>
 

@@ -3,6 +3,7 @@ import { httpService } from './httpService'
 
 import { storageService } from './asyncStorageService'
 import { statusNames } from './settings'
+import { utilService } from './utilService'
 
 export const productService = {
     queryProducts,
@@ -23,9 +24,11 @@ async function saveProduct(product) {
     }
 }
 
-async function queryProducts(filterBy = { ctg: '' }) {
+async function queryProducts(filterBy) {
+    const query=utilService.buildQueryStr(filterBy)
+    console.log(query)
     try {
-        // return await httpService.get('product', filterBy)
+        // return await httpService.get('products${query}')
         return await storageService.query('product')
     } catch (err) {
         throw err
@@ -41,10 +44,10 @@ async function getProductById(productId) {
 }
 
 async function patchProducts(patch) {
-    const query=patch.action? `?action=${action}`:''
+    
     try {
-        // return await httpService.patch(`product${query}`, products)
-        return await storageService.putMany('product', products)
+        // return await httpService.patch('products', patch)
+        // return await storageService.putMany('product', products)
     } catch (err) {
         throw err
     }

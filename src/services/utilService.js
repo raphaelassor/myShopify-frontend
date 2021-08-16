@@ -1,8 +1,9 @@
-
+import queryString from 'query-string'
 export const utilService = {
     delay,
     getRandomInt,
-    makeId
+    makeId,
+    buildQueryStr,
 }
 
 function delay(ms = 1500) {
@@ -24,4 +25,18 @@ function makeId(length = 5) {
         txt += possible.charAt(Math.floor(Math.random() * possible.length));
     }
     return txt;
+}
+function buildQueryStr(criteria){
+    const trimmedCriteria=trimEmptyVals(criteria)
+    let str='?';
+    str+=queryString.stringify(trimmedCriteria)
+    return str
+}
+function trimEmptyVals(obj){
+    const trimmed={}
+     for (let [key,value] of Object.entries(obj)){
+        if(Array.isArray(value)&&value.length)trimmed[key]=value 
+        else if(value||value===0)trimmed[key]=value  
+    }
+    return trimmed
 }

@@ -5,7 +5,7 @@ export const DataActions = ({ type, data }) => {
 
         switch (type) {
                 case PRODUCT_TYPE:
-                        return <ProductViewActions products={data} />
+                        return <ProductViewActions productsMap={data} />
                 default: return ''
         }
 
