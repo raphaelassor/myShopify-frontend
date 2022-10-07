@@ -1,5 +1,5 @@
 // import { storageService } from './asyncStorageService'
-import { httpService } from './httpService'
+import { httpService } from './api'
 const SCORE_FOR_REVIEW = 10
 
 export const userService = {

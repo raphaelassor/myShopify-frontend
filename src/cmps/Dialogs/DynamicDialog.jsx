@@ -11,6 +11,6 @@ export const DynamicDialog = () => {
             return <TagsEditModal {...dialog.props} />
         case SINGLE_SELECT_POPOVER:
             return <SingleSelectPopover {...dialog.props} />
-        default: return ''
+        default: return null
     }
 } 

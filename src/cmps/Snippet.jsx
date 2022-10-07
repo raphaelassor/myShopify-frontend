@@ -1,5 +1,5 @@
 
-import IconClose from '@material-ui/icons/Clear';
+import IconClose from '@mui/icons-material/Clear';
 
 export const Snippet = ({ children, handleChange, remove }) => {
     return <span className="snippet" onClick={handleChange}>

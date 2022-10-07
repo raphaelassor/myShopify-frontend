@@ -1,6 +1,6 @@
 import { ReactComponent as ImgIcon } from '../assets/img/icons/image.svg'
 import { StatusWidget } from "./StatusWidget"
-import Checkbox from '@material-ui/core/Checkbox';
+import Checkbox from '@mui/material/Checkbox';
 export const ProductPreview = ({ product,isSelected,handleChange }) => {
 
    

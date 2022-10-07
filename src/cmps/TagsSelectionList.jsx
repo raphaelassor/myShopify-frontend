@@ -1,5 +1,5 @@
  
-import Checkbox from '@material-ui/core/Checkbox';
+import Checkbox from '@mui/material/Checkbox';
 import { utilService } from '../services/utilService';
 
 export const TagsSelectionList = ({ tagsToShow, selectedTags, handleChange }) => {

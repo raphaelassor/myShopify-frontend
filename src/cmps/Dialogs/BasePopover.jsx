@@ -1,5 +1,5 @@
 import { useState,useEffect } from 'react';
-import Popover from '@material-ui/core/Popover';
+import Popover from '@mui/material/Popover';
 import { utilService } from '../../services/utilService';
 import { useDispatch } from 'react-redux';
 import { closeDialog } from '../../store/actions/appActions';

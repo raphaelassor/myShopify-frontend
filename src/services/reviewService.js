@@ -1,4 +1,4 @@
-import { httpService } from './httpService'
+import { httpService } from './api'
 // import { storageService } from './asyncStorageService'
 // import userService from './userService'
 // import { utilService } from './utilService'
