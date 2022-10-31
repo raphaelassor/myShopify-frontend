@@ -1,8 +1,6 @@
-import Axios, { AxiosRequestConfig, Method, AxiosError } from 'axios'
-import { storageService } from './asyncStorageService'
-import { ApiResponse } from './types'
+import Axios, { Method, AxiosError } from 'axios'
+import { ApiResponse } from './types/general'
 
-const DEV_MODE = 'mock'
 const BASE_URL = process.env.NODE_ENV === 'production'
     ? '/api/'
     : '//localhost:3030/api/'

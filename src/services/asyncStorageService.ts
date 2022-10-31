@@ -1,13 +1,13 @@
-import { productService } from "./productService"
-import { statusNames } from "./settings"
+// import { productService } from "./productService"
+// import { statusNames } from "./settings"
 import { utilService } from "./utilService"
 import { isEmpty, isArray } from 'lodash'
-import { Shop } from "./types"
-import { Product } from "./models/product"
+import { Shop } from "./types/general"
+import { Product, ProductsResponse } from "../pages/Products/types"
 
 type EntityType = 'products' | 'orders' | 'customers' | 'shop'
 
-type ResultByType<T> = T extends 'products' ? Product[] : any[]
+type ResultByType<T> = T extends 'products' ? ProductsResponse['items'] : any[]
 export const storageService = {
     queryAsDB,
     getById,
@@ -21,7 +21,7 @@ export const storageService = {
 
 async function queryAsDB<T extends EntityType>(entityType: T): Promise<ResultByType<T>> {
     const entities = getEntitiesByType(entityType)
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
         setTimeout(() => {
             saveToLocal(entityType, entities)
             resolve(entities)
@@ -126,23 +126,29 @@ function _createDemoProducts() {
     const getDemoProduct = (): Product => ({
         id: utilService.makeId(),
         title: 'Demo ' + utilService.getRandomInt(),
-        price: +((Math.random() * 100).toFixed(2)),
         status: Math.random() < 0.3 ? 'active' : 'archive',
         type: 'lorem ' + utilService.getRandomInt(),
         vendor: 'lorem ' + utilService.getRandomInt(),
         inventory: Math.floor(Math.random() * 10000),
         tags: [{ id: '123s', title: 'Luxury' }, { id: '12sad', title: 'to edit' }],
-        comparePrice: 74,
         description: 'DEMO DESCRIPTION',
-        cost: 0,
-        sku: 'sdsdsd',
         imgUrls: ['URL'],
         suppliers: ['amazon'],
-        weight: {
-            value: 39,
-            unit: 'oz'
-        },
-        origin: 'CN'
+        origin: 'CN',
+        categories: null,
+        variantsByOptionIds: {
+            'ISJD': {
+                weight: {
+                    value: 39,
+                    unit: 'oz'
+                },
+                sku: 'sdsdsd',
+                cost: 0,
+                comparePrice: 74,
+                price: +((Math.random() * 100).toFixed(2)),
+                imgUrl: 'sds'
+            }
+        }
     })
     for (let i = 0; i <= 20; i++) {
         products.push(getDemoProduct())

@@ -1,38 +1,39 @@
+import React from 'react';
 import IconClose from '@mui/icons-material/Clear';
-import { useEffect, useState } from 'react';
 import { Accordion } from './Accordion';
+import { FormData } from './form/types';
+import { ChangeHandler } from '../services/types/helpers';
+import { RadioSelectForm } from './form/RadioSelectForm';
 
 // TODO:  FilterPanel
 // TODO: resetFilterField and resetAllFilters props.
-export const FilterDialog = ({
+// TODO: change hide to close
+
+interface Props {
+  filter: Record<string, any>;
+  isOpen: boolean;
+  hide: () => void;
+  resetFilter: (keyName?: string) => void;
+  filterOptions: FormData;
+  handleChange: ChangeHandler;
+  isEmpty: boolean;
+}
+export const FilterDialog: React.FC<Props> = ({
   filter,
   isOpen,
   hide,
   resetFilter,
-  data,
+  filterOptions,
   handleChange,
   isEmpty,
 }) => {
-  // TODO : unclear management of the unset. make it cleaner.
-  const UNSET_IDX = -1;
-  const [selectedItem, setAccordionItem] = useState(UNSET_IDX);
-
-  useEffect(() => {
-    if (!isOpen) setAccordionItem(UNSET_IDX);
-  }, [isOpen]);
-
-  const onItemSelect = (idx) => {
-    const selectedIdx = selectedItem === idx ? UNSET_IDX : idx;
-    setAccordionItem(selectedIdx);
-  };
-
   const expandClass = isOpen ? 'expand' : '';
   return (
     <>
       <div onClick={hide} className={`overlay ${expandClass}`}></div>
       <div className={`more-filters ${expandClass}`}>
         <h2 className="flex justify-space-between">
-          More Filters{' '}
+          More Filters
           <span onClick={hide}>
             <IconClose />
           </span>
@@ -40,11 +41,18 @@ export const FilterDialog = ({
         <hr />
         <div className="body">
           <Accordion
-            data={data}
-            filter={filter}
-            onSelect={onItemSelect}
-            handleChange={handleChange}
-            selectedItem={selectedItem}
+            tabs={filterOptions}
+            currentData={filter}
+            renderBody={(item) => (
+              //TODO: NEEDS TO MOVE TO DYNAMIC COMPONENT BASED ON THE TYPE - NOT EVERYTHING WILL BE OR SHOULD BE RADIO
+              <RadioSelectForm
+                name={item.keyName}
+                value={filter[item.keyName]}
+                options={item.options ?? []}
+                onClearAll={() => resetFilter(item.keyName)}
+                onChange={handleChange}
+              />
+            )}
           />
         </div>
         <hr />

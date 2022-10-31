@@ -1,6 +1,6 @@
 import { shopService } from "../../services/shopService";
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { Shop } from "../../services/types";
+import { Shop } from "../../services/types/general";
 
 
 export const loadShop = createAsyncThunk<Shop, string>('shop/loadShop', async (shopId: string) => {

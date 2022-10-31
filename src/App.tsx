@@ -5,9 +5,11 @@ import { AppHeader } from './cmps/AppHeader';
 import { Home } from './pages/Home';
 import { RootState, useAppDispatch } from './store/store';
 import { loadShop } from './store/actions/shop';
+import { useSelector } from 'react-redux';
+import { ProductsPage } from './pages/Products/Products';
 
 export const App = () => {
-  const currentShop = useSelector((app: RootState) => app.shopModule);
+  let currentShop = useSelector((app: RootState) => app.shopModule);
   const shopRef = useRef<RootState['shopModule']['data']>(currentShop.data);
   const dispatch = useAppDispatch();
   useEffect(() => {
@@ -25,7 +27,7 @@ export const App = () => {
           <MainNavBar />
           <section className="main-container">
             <Routes>
-              {/* <Route element={<ProductsPage />} path={'products/*'} /> */}
+              <Route element={<ProductsPage />} path={'products/*'} />
               <Route element={<Home />} path={'/'} />
             </Routes>
           </section>

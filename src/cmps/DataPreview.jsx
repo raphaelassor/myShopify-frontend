@@ -8,6 +8,6 @@ export const DataPreview = (props) => {
     case PRODUCT_TYPE:
       return <ProductPreview product={entity} {...props} />;
     default:
-      return '';
+      return null;
   }
 };

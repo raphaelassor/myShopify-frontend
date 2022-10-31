@@ -1,0 +1,16 @@
+
+.generic-dropdown{
+    
+    
+        .label{
+            padding:rem(10px) rem(8px);
+            border-radius: $brdRad1;
+            &:hover{
+                background-color: $hover1;
+                cursor: pointer;
+            }
+        }
+    &.default{
+     padding:rem(8px)   
+    }
+}

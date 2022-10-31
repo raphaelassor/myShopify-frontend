@@ -7,3 +7,5 @@ export interface Shop {
     id: string,
     title: string
 }
+
+export type Status = 'active' | 'archive' | 'draft'

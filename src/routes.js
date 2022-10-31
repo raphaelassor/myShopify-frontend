@@ -1,5 +1,5 @@
 import {Home} from './pages/Home'
-import {ProductsPage} from './pages/Products'
+import {ProductsPage} from './pages/Products/Products'
 export const routes = [
     
     {

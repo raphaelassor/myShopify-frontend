@@ -13,7 +13,7 @@
             text-transform: capitalize;
         }
         &:hover,
-        &.active {
+        &.active-state {
             span {
                 color: #202223;
             }
@@ -28,13 +28,13 @@
         }
         &:hover {
             text-decoration: none;
-            &:not(.active) {
+            &:not(.active-state) {
                 &::after {
                     background-color: $clr4;
                 }
             }
         }
-        &.active {
+        &.active-state{
             svg {
                 path {
                     fill: $clr5;

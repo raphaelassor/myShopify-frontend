@@ -1,10 +1,12 @@
 
-import { api } from './api'
-import axios from 'axios'
+// import { api } from './api'
+// import axios from 'axios'
 import { storageService } from './asyncStorageService'
 import { statusNames } from './settings'
 import { utilService } from './utilService'
-import { Product } from './models/product'
+import { ProductsResponse, Product } from '../pages/Products/types'
+import { api } from './api'
+import { uniq, uniqBy } from 'lodash'
 
 export const productService = {
     queryProducts,
@@ -16,13 +18,28 @@ export const productService = {
     patchProducts,
     getEmptyProduct,
     getProductsFilter,
+    getTags
 }
 
-async function queryProducts(filterBy?: Record<string, string | number | number[] | string[]>) {
-    const query = utilService.buildQueryStr(filterBy)
+export interface SortRequest {
+    sortId: string,
+    sortOrder: 'asc' | 'desc'
+}
+
+export interface SkipRequest {
+    skipStart: number;
+    skipEnd: number;
+}
+export type Filters = { [x: string]: string | number | number[] | string[] | boolean | undefined, status?: string, sort?: string, page?: number, term?: string }
+
+export type BaseQueryRequest = SortRequest | SkipRequest | Filters
+
+async function queryProducts(criteria: BaseQueryRequest) {
+    const query = utilService.buildQueryStr(criteria)
     try {
-        // return await api.get(`products`,{filterBy})
-        return await storageService.queryAsDB('products')
+        // return await api.get(`products`,{...criteria})
+        const products = await storageService.queryAsDB('products')
+        return { data: { items: products, totalCount: products.length } }
     } catch (err) {
         throw err
     }
@@ -37,7 +54,7 @@ async function getProductById(productId: string) {
     }
 }
 
-async function patchProducts(products: Product[]) {
+async function patchProducts(products: ProductsResponse['items']) {
     try {
         // return await api.patch('products', patch)
         // return await axios.patch('//localhost:3030/api/products',patch)
@@ -76,6 +93,10 @@ async function createProduct(product: Omit<Product, 'id'>) {
     return await storageService.post('products', product)
 }
 
+async function getTags() {
+    // return await api.get('products/tags')
+    return uniqBy((await storageService.queryAsDB('products')).map(product => product.tags).flat(), 'id')
+}
 
 
 function getEmptyProduct() {

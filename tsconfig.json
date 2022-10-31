@@ -1,44 +1,22 @@
-// {
-//   "compilerOptions": {
-//     "target": "ES2018",
-//     "allowJs": true,
-//     "module": "es2020" /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', 'es2020', or 'ESNext'. */,
-//     "strict": true /* Enable all strict type-checking options. */,
-//     "forceConsistentCasingInFileNames": true,
-//     "noEmit": true,
-//     "outDir": "dist",
-//     "declaration": true,
-//     "jsx": "react",
-//     "moduleResolution": "Node",
-//     "noImplicitAny": true,
-//     "noUnusedLocals": true,
-//     "noUnusedParameters": true,
-//     "noImplicitReturns": true,
-//     "stripInternal": true,
-//     "allowSyntheticDefaultImports": true
-//   },
-//   "include": ["src"]
-// }
-
 {
   "compilerOptions": {
-    "target": "es6",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "target": "ES2018",
     "allowJs": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
+    "module": "commonjs" /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', 'es2020', or 'ESNext'. */,
+    "strict": true /* Enable all strict type-checking options. */,
     "forceConsistentCasingInFileNames": true,
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
     "noEmit": true,
+    "outDir": "dist",
+    "declaration": true,
     "jsx": "react",
-    "checkJs": true,
-    "rootDir": "src",
-    "baseUrl": "."
+    "moduleResolution": "Node",
+    "noImplicitAny": true,
+    // "noUnusedLocals": true,
+    // "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "stripInternal": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true
   },
   "include": ["src"]
 }

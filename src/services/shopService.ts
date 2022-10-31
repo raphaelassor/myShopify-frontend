@@ -1,6 +1,6 @@
 import { storageService } from './asyncStorageService'
 import { api } from './api'
-import { Shop } from './types'
+import { Shop } from './types/general'
 
 export const shopService = {
     getShopById,

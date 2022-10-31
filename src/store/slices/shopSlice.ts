@@ -4,7 +4,7 @@
 import { createSlice, } from '@reduxjs/toolkit'
 import { loadShop } from '../actions/shop';
 
-interface ShopState {
+export interface ShopState {
     data: {
         id: string,
         title: string,
@@ -26,7 +26,9 @@ const shopSlice = createSlice({
     name: 'shop',
     initialState,
     reducers: {
-        setShop: (state, { payload }) => state = payload
+        setShop: (state, { payload }) => {
+            state = payload
+        }
     },
     extraReducers: (builder) => {
         builder.addCase(loadShop.fulfilled, (state, action) => {

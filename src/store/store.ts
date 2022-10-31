@@ -1,10 +1,6 @@
-import { applyMiddleware, compose } from 'redux'
 import { configureStore } from '@reduxjs/toolkit'
 import logger from 'redux-logger'
-import { reviewReducer } from './slices/reviewReducer'
-import { userReducer } from './slices/userReducer'
 import appReducer from './slices/appSlice'
-import { productReducer } from './slices/productReducer'
 import { shopReducer } from './slices/shopSlice'
 import { useDispatch } from 'react-redux'
 

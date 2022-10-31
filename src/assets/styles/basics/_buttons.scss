@@ -16,14 +16,13 @@
     background-color: white;
     border:1px solid $brd2;
     &:hover{
-        background-color:#f6f6f7
+        background-color:$hover1
     }
 }
 
 .btn-md{
-    padding:rem(7px) rem(16px) ;
+    padding:rem(10px) rem(16px) ;
     border-radius: $brdRad1;
-    min-height: rem(36px);
     font-size: rem(14px);
     @include centerAllInside;
 }
@@ -35,15 +34,17 @@
 .btn-bar{
     .btn-md{
         border-radius: unset;
-        &:not(:first-child){
+        &:not(.first-in-bar){   
             border-left: unset;
         }
-        &:first-child{
+        &.first-in-bar
+        {
             border-bottom-left-radius: $brdRad1;
             border-top-left-radius: $brdRad1;
           
         }
-        &:last-child{
+        &.last-in-bar
+        {
             border-bottom-right-radius: $brdRad1;
             border-top-right-radius: $brdRad1;
         }
